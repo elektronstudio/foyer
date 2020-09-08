@@ -31,6 +31,28 @@ const Message = (props) => {
   );
 };
 
+const Polygon = (props) => {
+  const points = props.points || [];
+  const color = props.color || "white";
+
+  const vectorPoints = useMemo(
+    () =>
+      new THREE.Shape().setFromPoints(
+        points.map((p) => new THREE.Vector2(p[0], p[1]))
+      ),
+    [points]
+  );
+
+  return (
+    <>
+      <mesh>
+        <shapeGeometry attach="geometry" args={[vectorPoints]} />
+        <meshBasicMaterial attach="material" color={color} />
+      </mesh>
+    </>
+  );
+};
+
 const Line = (props) => {
   const [ref] = useResource();
   const points = props.points || [];
@@ -51,7 +73,7 @@ const Line = (props) => {
         <lineBasicMaterial
           attach="material"
           color={color}
-          linewidth={1}
+          linewidth={100}
           linecap={"round"}
           linejoin={"round"}
         />
@@ -87,11 +109,6 @@ const Grid = (props) => {
     </>
   );
 };
-
-// function Asset({ url }) {
-//   const gltf = useLoader(GLTFLoader, url);
-//   return <primitive object={gltf.scene} dispose={null} />;
-// }
 
 const Schedule = (props) => {
   const url =
@@ -135,6 +152,20 @@ const App = () => {
   const [showSchedule, setShowSchedule] = useState(false);
   const numbers = range(-5, 5);
   const mesh = useRef();
+  const points = [
+    [0, 0, 0],
+    [1, 0, 0],
+    [1, 1, 0],
+    [0, 1, 0],
+    [0, 0, 0],
+  ];
+  const points2 = [
+    [0.1, 0, 0],
+    [0.9, 0, 0],
+    [0.9, 0.9, 0],
+    [0.1, 0.9, 0],
+    [0.1, 0.1, 0],
+  ];
   return (
     <>
       <div style={{ width: "100vw", height: "100vh" }}>
@@ -170,6 +201,11 @@ const App = () => {
             position={[0, -5, 0]}
             color="yellow"
           />
+          <Polygon points={points} color="#333" />
+          <Line points={points} color="white" />
+          {/* <group position-z="0.01">
+            <Polygon points={points2} color="black" />
+          </group> */}
           <EffectComposer>
             <Bloom
               luminanceThreshold={0.1}
