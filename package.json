@@ -1,0 +1,21 @@
+{
+  "name": "elektron",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@pika/react": "^16.13.1",
+    "@pika/react-dom": "^16.13.1",
+    "drei": "^1.5.2",
+    "postprocessing": "^6.17.3",
+    "react-postprocessing": "^1.3.1",
+    "react-three-fiber": "^4.2.21",
+    "three": "^0.120.1"
+  },
+  "devDependencies": {
+    "vite": "^1.0.0-rc.1",
+    "vite-plugin-react": "^3.0.0"
+  }
+}
