@@ -1,14 +1,14 @@
-import ReactDOM from 'react-dom';
-import React, { Suspense, useRef, useState, useMemo, useCallback } from 'react';
-import { Canvas, useFrame } from 'react-three-fiber';
-import { EffectComposer, Bloom } from 'react-postprocessing';
-import { Plane, OrbitControls, Text, Sphere } from 'drei';
-import { useLoader } from 'react-three-fiber';
-import * as THREE from 'three';
-import { useThree, useResource } from 'react-three-fiber';
+import ReactDOM from "react-dom";
+import React, { Suspense, useRef, useState, useMemo, useCallback } from "react";
+import { Canvas, useFrame } from "react-three-fiber";
+import { EffectComposer, Bloom } from "react-postprocessing";
+import { Plane, OrbitControls, Text, Sphere } from "drei";
+import { useLoader } from "react-three-fiber";
+import * as THREE from "three";
+import { useThree, useResource } from "react-three-fiber";
 
-import './styles.css';
-import { range, random, useFetch } from './utils';
+import "./styles.css";
+import { range, random, useFetch } from "./utils";
 //import { GLTFLoader } from './loaders/GLTFLoader';
 
 const Message = (props) => {
@@ -20,7 +20,7 @@ const Message = (props) => {
       maxWidth={100}
       lineHeight={1}
       letterSpacing={-0.05}
-      textAlign={'left'}
+      textAlign={"left"}
       font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
       anchorX="center"
       anchorY="middle"
@@ -32,13 +32,13 @@ const Message = (props) => {
 };
 
 const Line = (props) => {
-  const [ref, object] = useResource();
+  const [ref] = useResource();
   const points = props.points || [];
-  const color = props.color || 'white';
+  const color = props.color || "white";
 
   const vectorPoints = useMemo(
     () => points.map((p) => new THREE.Vector3(...p)),
-    [],
+    []
   );
 
   const onUpdate = useCallback((self) => self.setFromPoints(vectorPoints), [
@@ -50,10 +50,10 @@ const Line = (props) => {
         <bufferGeometry attach="geometry" onUpdate={onUpdate} />
         <lineBasicMaterial
           attach="material"
-          color={props.color}
+          color={color}
           linewidth={1}
-          linecap={'round'}
-          linejoin={'round'}
+          linecap={"round"}
+          linejoin={"round"}
         />
       </line>
     </>
@@ -95,32 +95,32 @@ const Grid = (props) => {
 
 const Schedule = (props) => {
   const url =
-    'https://www.googleapis.com/calendar/v3/calendars/mkr5k66b069hve1f7aa77m4bsc@group.calendar.google.com/events?key=AIzaSyAkeDHwQgc22TWxi4-2r9_5yMWVnLQNMXc';
+    "https://www.googleapis.com/calendar/v3/calendars/mkr5k66b069hve1f7aa77m4bsc@group.calendar.google.com/events?key=AIzaSyAkeDHwQgc22TWxi4-2r9_5yMWVnLQNMXc";
   const { response } = useFetch(url);
   return (
     <div
       {...props}
       style={{
-        position: 'fixed',
+        position: "fixed",
         top: 0,
         left: 0,
         bottom: 0,
-        width: '50vw',
-        border: '1px solid white',
-        background: 'rgba(20, 20, 20, 1)',
-        margin: '10px',
-        overflow: 'auto',
-        color: 'white',
-        fontFamily: 'sans-serif',
-        padding: '20px',
+        width: "50vw",
+        border: "1px solid white",
+        background: "rgba(20, 20, 20, 1)",
+        margin: "10px",
+        overflow: "auto",
+        color: "white",
+        fontFamily: "sans-serif",
+        padding: "20px",
       }}
     >
       {response
         ? response.items.map((item, i) => (
             <div
               style={{
-                borderTop: i !== 0 ? '1px solid #aaa' : '',
-                padding: '10px 0',
+                borderTop: i !== 0 ? "1px solid #aaa" : "",
+                padding: "10px 0",
               }}
             >
               {item.summary}
@@ -137,7 +137,7 @@ const App = () => {
   const mesh = useRef();
   return (
     <>
-      <div style={{ width: '100vw', height: '100vh' }}>
+      <div style={{ width: "100vw", height: "100vh" }}>
         <Canvas invalidateFrameloop>
           <ambientLight />
           <pointLight position={[10, 10, 10]} />
@@ -187,7 +187,7 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById("root"));
 
 if (import.meta.hot) {
   //import.meta.hot.accept();
