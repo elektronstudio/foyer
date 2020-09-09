@@ -6,7 +6,15 @@ import { EffectComposer, Bloom, Glitch } from "react-postprocessing";
 import { GlitchMode } from "postprocessing";
 import { useAudio } from "react-use";
 
-import { Grid, Image, Line, Message, Polygon, Schedule } from "./components";
+import {
+  Grid,
+  Image,
+  Line,
+  Message,
+  Polygon,
+  Schedule,
+  Music,
+} from "./components";
 import { range, degToRad } from "./utils";
 import "./styles.css";
 
@@ -19,37 +27,6 @@ const rectPoints = (w = 1, h = 1) => [
 ];
 
 //const extrudePoints = (points, depth) => points.map(p => [[p[0],p[1],0],[p[0],p[1],0])
-
-const Music = () => {
-  // From https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Blue_Dressed_Man/Voidland_EP/Blue_Dressed_Man_-_01_-_welcome.mp3
-  const [audio, state, controls, ref] = useAudio({
-    src: "./music.mp3",
-  });
-  useEffect(() => {
-    controls.volume(0.2);
-    controls.play();
-  }, []);
-
-  return (
-    <>
-      <div
-        style={{
-          position: "fixed",
-          right: 0,
-          bottom: 0,
-          padding: "10px",
-          color: "white",
-          fontFamily: "sans-serif",
-          cursor: "pointer",
-        }}
-        onClick={() => (state.paused ? controls.play() : controls.pause())}
-      >
-        {state.paused ? "▶" : "❚❚"}
-      </div>
-      {audio}
-    </>
-  );
-};
 
 const App = () => {
   const [showSchedule, setShowSchedule] = useState(false);
