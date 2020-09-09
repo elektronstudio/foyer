@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Math as M } from "three";
+
+export const degToRad = M.degToRad;
+export const radToDeg = M.radToDeg;
 
 export const range = (from, to, step = 1) => {
   const length = Math.floor((to - from) / step) + 1;

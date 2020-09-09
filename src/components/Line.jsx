@@ -14,7 +14,7 @@ export const Line = (props) => {
   ]);
   return (
     <>
-      <line ref={ref}>
+      <line ref={ref} {...props}>
         <bufferGeometry attach="geometry" onUpdate={onUpdate} />
         <lineBasicMaterial
           attach="material"

@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Shape, Vector2 } from "three";
+import { Shape, Vector2, DoubleSide } from "three";
 
 export const Polygon = (props) => {
   const points = props.points || [];
@@ -13,7 +13,7 @@ export const Polygon = (props) => {
   return (
     <mesh {...props}>
       <shapeGeometry attach="geometry" args={[vectorPoints]} />
-      <meshBasicMaterial attach="material" color={color} />
+      <meshBasicMaterial attach="material" color={color} side={DoubleSide} />
     </mesh>
   );
 };

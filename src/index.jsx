@@ -1,4 +1,4 @@
-import React, { Suspense, useRef, useState, useEffect } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Canvas, useFrame } from "react-three-fiber";
 import { OrbitControls } from "drei";
@@ -7,27 +7,21 @@ import { GlitchMode } from "postprocessing";
 import { useAudio } from "react-use";
 
 import { Grid, Image, Line, Message, Polygon, Schedule } from "./components";
-import { range } from "./utils";
+import { range, degToRad } from "./utils";
 import "./styles.css";
+
+const rectPoints = (w = 1, h = 1) => [
+  [w / -2, h / 2, 0],
+  [w / 2, h / 2, 0],
+  [w / 2, h / -2, 0],
+  [w / -2, h / -2, 0],
+  [w / -2, h / 2, 0],
+];
 
 const App = () => {
   const [showSchedule, setShowSchedule] = useState(false);
   const numbers = range(-5, 5);
-  const mesh = useRef();
-  const points = [
-    [0, 0, 0],
-    [1, 0, 0],
-    [1, 1, 0],
-    [0, 1, 0],
-    [0, 0, 0],
-  ];
-  const points2 = [
-    [0.1, 0, 0],
-    [0.9, 0, 0],
-    [0.9, 0.9, 0],
-    [0.1, 0.9, 0],
-    [0.1, 0.1, 0],
-  ];
+
   const [audio, state, controls, ref] = useAudio({
     src:
       "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Blue_Dressed_Man/Voidland_EP/Blue_Dressed_Man_-_01_-_welcome.mp3",
@@ -38,37 +32,21 @@ const App = () => {
   return (
     <>
       <div style={{ width: "100vw", height: "100vh" }}>
-        <Canvas invalidateFrameloop camera={{ position: [0, 0, 10] }}>
+        <Canvas invalidateFrameloop camera={{ position: [0, 3, 10] }}>
           <ambientLight />
           <pointLight position={[10, 10, 10]} />
-          <Grid
-            from={-25}
-            to={25}
-            position={[0, 5, 0]}
-            rotation={[Math.PI / 2, 0, 0]}
-            color="gray"
+
+          <Polygon
+            points={rectPoints(10, 10)}
+            color="#333"
+            rotation={[degToRad(-90), 0, 0]}
           />
-          <Grid
-            from={-25}
-            to={25}
-            position={[0, -5, 0]}
-            rotation={[Math.PI / 2, 0, 0]}
-            color="gray"
+          <Line
+            points={rectPoints(10, 10)}
+            color="white"
+            rotation={[degToRad(-90), 0, 0]}
           />
-          <group
-            rotation={[0, Math.PI / 4, 0]}
-            onClick={() => setShowSchedule(!showSchedule)}
-          >
-            <Message position={[0, 0, -10]}>Schedule</Message>
-          </group>
-          <Message position={[0, 0, -10]}>Live</Message>
-          <group rotation={[0, -Math.PI / 4, 0]}>
-            <Message position={[0, 0, -10]}>Demo</Message>
-          </group>
-          <Suspense fallback={null}>
-            <Image src="/hexacoralia.jpg" />
-          </Suspense>
-          <Line points={points} color="white" />
+
           <EffectComposer>
             <Bloom
               luminanceThreshold={0.1}
