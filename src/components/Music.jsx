@@ -6,10 +6,10 @@ import { useAudio } from "react-use";
 export const Music = () => {
   const [audio, state, controls, ref] = useAudio({
     src: "./music.mp3",
+    autoplay: true,
   });
   useEffect(() => {
     controls.volume(0.2);
-    //controls.play();
   }, []);
 
   return (
