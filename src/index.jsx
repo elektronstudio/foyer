@@ -14,6 +14,8 @@ import { useLoader } from "react-three-fiber";
 import * as THREE from "three";
 import { useThree, useResource } from "react-three-fiber";
 import { useAudio } from "react-use";
+import { Glitch } from "react-postprocessing";
+import { GlitchMode } from "postprocessing";
 
 import "./styles.css";
 import { range, random, useFetch } from "./utils";
@@ -248,6 +250,14 @@ const App = () => {
               luminanceThreshold={0.1}
               luminanceSmoothing={0.9}
               height={300}
+            />
+            <Glitch
+              delay={[3, 6]}
+              duration={[0.1, 0.2]}
+              strength={[0.1, 0.2]}
+              mode={GlitchMode.SPORADIC}
+              active
+              ratio={0.85}
             />
           </EffectComposer>
           <OrbitControls />
