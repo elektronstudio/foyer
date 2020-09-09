@@ -6,15 +6,7 @@ import { EffectComposer, Bloom, Glitch } from "react-postprocessing";
 import { GlitchMode } from "postprocessing";
 import { useAudio } from "react-use";
 
-import {
-  Grid,
-  Image,
-  Line,
-  Message,
-  Polygon,
-  Schedule,
-  Extrude,
-} from "./components";
+import { Grid, Image, Line, Message, Polygon, Schedule } from "./components";
 import { range, degToRad } from "./utils";
 import "./styles.css";
 
@@ -52,7 +44,7 @@ const App = () => {
       <div style={{ width: "100vw", height: "100vh" }}>
         <Canvas
           shadowMap={true}
-          invalidateFrameloop={false}
+          invalidateFrameloop={true}
           camera={{ position: [0, 3, 10] }}
         >
           <ambientLight />
@@ -62,11 +54,6 @@ const App = () => {
           <Polygon
             points={rectPoints(10, 10)}
             rotation={[degToRad(-90), 0, 0]}
-            color="#111"
-          />
-          <Polygon
-            points={rectPoints(10, 10)}
-            position={[0, 5, 0]}
             color="#111"
           />
           <EffectComposer>

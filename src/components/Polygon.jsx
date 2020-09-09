@@ -17,7 +17,7 @@ export const Polygon = (props) => {
         <shapeGeometry attach="geometry" args={[vectorPoints]} />
         <meshPhongMaterial attach="material" color={color} side={DoubleSide} />
       </mesh>
-      {/* <Line points={points} /> */}
+      <Line points={points} />
     </group>
   );
 };

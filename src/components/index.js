@@ -1,4 +1,3 @@
-export * from "./Extrude";
 export * from "./Grid";
 export * from "./Image";
 export * from "./Line";
