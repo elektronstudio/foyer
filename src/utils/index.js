@@ -43,3 +43,13 @@ export const useFetch = (url, options) => {
   }, []);
   return { response, error, loading };
 };
+
+export const pointsMidpoint = ([x1, y1], [x2, y2]) => [
+  (x1 + x2) / 2,
+  (y1 + y2) / 2,
+];
+
+export const pointsAngle = ([x1, y1], [x2, y2]) => Math.atan2(y2 - y1, x2 - x1);
+
+export const pointsDistance = ([x1, y1], [x2, y2]) =>
+  Math.hypot(x2 - x1, y2 - y1);

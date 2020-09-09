@@ -9,7 +9,7 @@ export const Music = () => {
   });
   useEffect(() => {
     controls.volume(0.2);
-    controls.play();
+    //controls.play();
   }, []);
 
   return (
