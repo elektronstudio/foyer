@@ -31,13 +31,26 @@ const Message = (props) => {
   );
 };
 
+const Image = (props) => {
+  const texture = useLoader(THREE.TextureLoader, props.src);
+  const ratio = texture.image.height / texture.image.width;
+  return (
+    <mesh>
+      <planeGeometry attach="geometry" args={[1, ratio]} />
+      <meshBasicMaterial
+        attach="material"
+        map={texture}
+        side={THREE.DoubleSide}
+      />
+    </mesh>
+  );
+};
+
 const Polygon = (props) => {
   const points = props.points || [];
   const color = props.color || "white";
 
-  const texture = useLoader(THREE.TextureLoader, "/hexacoralia.jpg");
-
-  console.log(texture);
+  //const texture = useLoader(THREE.TextureLoader, "/hexacoralia.jpg");
 
   const vectorPoints = useMemo(
     () =>
@@ -51,7 +64,7 @@ const Polygon = (props) => {
     <>
       <mesh>
         <shapeGeometry attach="geometry" args={[vectorPoints]} />
-        <meshBasicMaterial attach="material" map={texture} />
+        <meshBasicMaterial attach="material" color={color} />
       </mesh>
     </>
   );
@@ -206,8 +219,11 @@ const App = () => {
             color="yellow"
           />
           <Suspense fallback={null}>
-            <Polygon points={points} color="#333" />
+            <Image src="/hexacoralia.jpg" />
           </Suspense>
+          {/* <Suspense fallback={null}>
+            <Polygon points={points} color="#333" />
+          </Suspense> */}
           <Line points={points} color="white" />
           {/* <group position-z="0.01">
             <Polygon points={points2} color="black" />
