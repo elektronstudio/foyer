@@ -1,11 +1,19 @@
 import ReactDOM from "react-dom";
-import React, { Suspense, useRef, useState, useMemo, useCallback } from "react";
+import React, {
+  Suspense,
+  useRef,
+  useState,
+  useMemo,
+  useCallback,
+  useEffect,
+} from "react";
 import { Canvas, useFrame } from "react-three-fiber";
 import { EffectComposer, Bloom } from "react-postprocessing";
 import { Plane, OrbitControls, Text, Sphere } from "drei";
 import { useLoader } from "react-three-fiber";
 import * as THREE from "three";
 import { useThree, useResource } from "react-three-fiber";
+import { useAudio } from "react-use";
 
 import "./styles.css";
 import { range, random, useFetch } from "./utils";
@@ -31,12 +39,12 @@ const Message = (props) => {
   );
 };
 
-const Image = (props) => {
-  const texture = useLoader(THREE.TextureLoader, props.src);
+const Image = ({ src, width }) => {
+  const texture = useLoader(THREE.TextureLoader, src);
   const ratio = texture.image.height / texture.image.width;
   return (
     <mesh>
-      <planeGeometry attach="geometry" args={[1, ratio]} />
+      <planeGeometry attach="geometry" args={[width, width * ratio]} />
       <meshBasicMaterial
         attach="material"
         map={texture}
@@ -183,10 +191,17 @@ const App = () => {
     [0.1, 0.9, 0],
     [0.1, 0.1, 0],
   ];
+  const [audio, state, controls, ref] = useAudio({
+    src:
+      "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Blue_Dressed_Man/Voidland_EP/Blue_Dressed_Man_-_01_-_welcome.mp3",
+    autoPlay: true,
+  });
+  useEffect(() => controls.volume(0.2), []);
+
   return (
     <>
       <div style={{ width: "100vw", height: "100vh" }}>
-        <Canvas invalidateFrameloop>
+        <Canvas invalidateFrameloop camera={{ position: [0, 0, 10] }}>
           <ambientLight />
           <pointLight position={[10, 10, 10]} />
           <Grid
@@ -241,14 +256,11 @@ const App = () => {
           <Schedule onClick={() => setShowSchedule(!showSchedule)} />
         )}
       </div>
+      {audio}
     </>
   );
 };
 
 ReactDOM.render(<App />, document.getElementById("root"));
-
-if (import.meta.hot) {
-  //import.meta.hot.accept();
-}
 
 //https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Blue_Dressed_Man/Voidland_EP/Blue_Dressed_Man_-_01_-_welcome.mp3
