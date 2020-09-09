@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 export const range = (from, to, step = 1) => {
   const length = Math.floor((to - from) / step) + 1;
