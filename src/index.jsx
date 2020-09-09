@@ -59,19 +59,6 @@ const Panels = ({ points }) => (
 
 const App = () => {
   const [showSchedule, setShowSchedule] = useState(false);
-  const numbers = range(-5, 5);
-
-  // const { scene, renderer } = useThree();
-  // if (typeof __THREE_DEVTOOLS__ !== "undefined") {
-  //   __THREE_DEVTOOLS__.dispatchEvent(
-  //     new CustomEvent("observe", { detail: scene })
-  //   );
-  //   __THREE_DEVTOOLS__.dispatchEvent(
-  //     new CustomEvent("observe", { detail: renderer })
-  //   );
-  // }
-
-  //return null;
 
   const points = [
     [-8, -8],
@@ -94,22 +81,33 @@ const App = () => {
           <pointLight position={[-40, 40, 40]} />
           <pointLight position={[40, 40, 40]} />
           <Polygon
-            points={rectPoints(15, 15)}
+            points={rectPoints(50, 50)}
             position={[0, -0.1, 0]}
             rotation={[degToRad(-90), 0, 0]}
             color="#090909"
           />
-          <Polygon
-            points={rectPoints(15, 15)}
+          {/* <Polygon
+            points={rectPoints(50, 55)}
             position={[0, 3.1, 0]}
             rotation={[degToRad(-90), 0, 0]}
             color="#090909"
-          />
+          /> */}
           <Panels points={points} />
-          <Message color="white" position={[-1, 1.5, 0]}>
+          <Message
+            color="white"
+            position={[-1, 1.5, 0]}
+            onClick={() => setShowSchedule(true)}
+          >
             Live
           </Message>
           <pointLight position={[-1, 2, 0]} color="green" />
+          <Suspense fallback={null}>
+            <Image
+              src="/hexacoralia.jpg"
+              position={[0, 20, 0]}
+              scale={[10, 10, 10]}
+            />
+          </Suspense>
           <EffectComposer>
             <Bloom
               luminanceThreshold={0.1}
