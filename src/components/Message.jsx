@@ -6,7 +6,7 @@ export const Message = (props) => {
   return (
     <Text
       color="white"
-      fontSize={1.75}
+      fontSize={1.25}
       maxWidth={100}
       lineHeight={1}
       letterSpacing={-0.01}

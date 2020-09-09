@@ -18,49 +18,44 @@ import {
 import {
   range,
   degToRad,
-  radToDeg,
   pointsMidpoint,
   pointsAngle,
   pointsDistance,
+  rectPoints,
+  pointsTransforms,
 } from "./utils";
 import "./styles.css";
 
-const rectPoints = (w = 1, h = 1) => [
-  [w / -2, h / 2, 0],
-  [w / 2, h / 2, 0],
-  [w / 2, h / -2, 0],
-  [w / -2, h / -2, 0],
-  [w / -2, h / 2, 0],
-];
-
-const points = [
-  [0, 0],
-  [1, 1],
-];
-const m = pointsMidpoint(...points);
-const a = pointsAngle(...points);
-
-const points2 = [
-  [0, 0],
-  [2, 2],
-  [3.5, 1],
-];
-
-const pointTransforms = (points) => {
-  let transforms = [];
-  points.forEach((p, i) => {
-    if (!!points[i + 1]) {
-      transforms.push({
-        position: [...pointsMidpoint(points[i], points[i + 1]), 0],
-        angle: pointsAngle(points[i], points[i + 1]),
-        width: pointsDistance(points[i], points[i + 1]),
-      });
-    }
-  });
-  return transforms;
-};
+// const pointTransforms = (points) => {
+//   let transforms = [];
+//   points.forEach((p, i) => {
+//     if (!!points[i + 1]) {
+//       transforms.push({
+//         position: [...pointsMidpoint(points[i], points[i + 1]), 0],
+//         angle: pointsAngle(points[i], points[i + 1]),
+//         width: pointsDistance(points[i], points[i + 1]),
+//       });
+//     }
+//   });
+//   return transforms;
+// };
 
 //const extrudePoints = (points, depth) => points.map(p => [[p[0],p[1],0],[p[0],p[1],0])
+
+const Panels = ({ points }) => (
+  <group rotation={[degToRad(-90), 0, 0]}>
+    {pointsTransforms(points).map((p, i) => (
+      <group key={i} position={p.position} rotation={[0, 0, p.angle]}>
+        <Polygon
+          position={[0, 0, 1.5]}
+          rotation={[degToRad(-90), 0, 0]}
+          points={rectPoints(p.width - 0.01, 3)}
+          color="#111"
+        />
+      </group>
+    ))}
+  </group>
+);
 
 const App = () => {
   const [showSchedule, setShowSchedule] = useState(false);
@@ -77,31 +72,38 @@ const App = () => {
   // }
 
   //return null;
+
+  const points = [
+    [-8, -8],
+    [-4, -5],
+    [-2, -2],
+    [-4, 1],
+    [-2, 4],
+    [1, 4],
+    [3, 1],
+    [1, -1],
+    [1, -3],
+    [5, -5],
+  ];
+
   return (
     <>
       <div style={{ width: "100vw", height: "100vh" }}>
-        <Canvas invalidateFrameloop={true} camera={{ position: [0, 3, 10] }}>
+        <Canvas invalidateFrameloop={true} camera={{ position: [0, 1.5, 7] }}>
           <ambientLight />
           <pointLight position={[-40, 40, 40]} />
           <pointLight position={[40, 40, 40]} />
           <Polygon
-            points={rectPoints(10, 10)}
+            points={rectPoints(15, 15)}
+            position={[0, -0.1, 0]}
             rotation={[degToRad(-90), 0, 0]}
-            color="#111"
+            color="#090909"
           />
-          <group rotation={[degToRad(-90), 0, 0]}>
-            {pointTransforms(points2).map((p, i) => (
-              <group key={i} position={p.position} rotation={[0, 0, p.angle]}>
-                <Polygon
-                  position={[0, 0, 1.5]}
-                  rotation={[degToRad(-90), 0, 0]}
-                  points={rectPoints(p.width - 0.01, 3)}
-                  color="#333"
-                />
-              </group>
-              // <Box scale={[p.width, 0.1, 10]} />
-            ))}
-          </group>
+          <Panels points={points} />
+          <Message color="white" position={[-1, 2, 0]}>
+            Live
+          </Message>
+          <pointLight position={[-1, 2, 0]} color="green" />
           <EffectComposer>
             <Bloom
               luminanceThreshold={0.1}
