@@ -27,9 +27,9 @@ const Message = (props) => {
       fontSize={1.75}
       maxWidth={100}
       lineHeight={1}
-      letterSpacing={-0.05}
+      letterSpacing={-0.01}
       textAlign={"left"}
-      font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
+      font="/font-medium.woff"
       anchorX="center"
       anchorY="middle"
       {...props}
@@ -222,11 +222,11 @@ const App = () => {
             rotation={[0, Math.PI / 4, 0]}
             onClick={() => setShowSchedule(!showSchedule)}
           >
-            <Message position={[0, 0, -10]}>SCHEDULE</Message>
+            <Message position={[0, 0, -10]}>Schedule</Message>
           </group>
-          <Message position={[0, 0, -10]}>LIVE</Message>
+          <Message position={[0, 0, -10]}>Live</Message>
           <group rotation={[0, -Math.PI / 4, 0]}>
-            <Message position={[0, 0, -10]}>DEMO</Message>
+            <Message position={[0, 0, -10]}>Demo</Message>
           </group>
           <Sphere
             scale={[0.1, 0.1, 0.1]}
