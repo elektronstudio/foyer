@@ -76,12 +76,12 @@ const App = () => {
   const points = [
     [-8, -8],
     [-4, -5],
-    [-2, -2],
+    [-3, -2],
     [-4, 1],
     [-2, 4],
     [1, 4],
     [3, 1],
-    [1, -1],
+    [0, -1],
     [1, -3],
     [5, -5],
   ];
@@ -89,7 +89,7 @@ const App = () => {
   return (
     <>
       <div style={{ width: "100vw", height: "100vh" }}>
-        <Canvas invalidateFrameloop={true} camera={{ position: [0, 1.5, 7] }}>
+        <Canvas invalidateFrameloop={true} camera={{ position: [0, 2, 6] }}>
           <ambientLight />
           <pointLight position={[-40, 40, 40]} />
           <pointLight position={[40, 40, 40]} />
@@ -99,8 +99,14 @@ const App = () => {
             rotation={[degToRad(-90), 0, 0]}
             color="#090909"
           />
+          <Polygon
+            points={rectPoints(15, 15)}
+            position={[0, 3.1, 0]}
+            rotation={[degToRad(-90), 0, 0]}
+            color="#090909"
+          />
           <Panels points={points} />
-          <Message color="white" position={[-1, 2, 0]}>
+          <Message color="white" position={[-1, 1.5, 0]}>
             Live
           </Message>
           <pointLight position={[-1, 2, 0]} color="green" />
