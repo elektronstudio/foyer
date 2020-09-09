@@ -35,6 +35,10 @@ const Polygon = (props) => {
   const points = props.points || [];
   const color = props.color || "white";
 
+  const texture = useLoader(THREE.TextureLoader, "/hexacoralia.jpg");
+
+  console.log(texture);
+
   const vectorPoints = useMemo(
     () =>
       new THREE.Shape().setFromPoints(
@@ -47,7 +51,7 @@ const Polygon = (props) => {
     <>
       <mesh>
         <shapeGeometry attach="geometry" args={[vectorPoints]} />
-        <meshBasicMaterial attach="material" color={color} />
+        <meshBasicMaterial attach="material" map={texture} />
       </mesh>
     </>
   );
@@ -201,7 +205,9 @@ const App = () => {
             position={[0, -5, 0]}
             color="yellow"
           />
-          <Polygon points={points} color="#333" />
+          <Suspense fallback={null}>
+            <Polygon points={points} color="#333" />
+          </Suspense>
           <Line points={points} color="white" />
           {/* <group position-z="0.01">
             <Polygon points={points2} color="black" />
