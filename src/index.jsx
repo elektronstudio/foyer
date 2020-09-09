@@ -194,7 +194,7 @@ const App = () => {
   const [audio, state, controls, ref] = useAudio({
     src:
       "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Blue_Dressed_Man/Voidland_EP/Blue_Dressed_Man_-_01_-_welcome.mp3",
-    autoPlay: true,
+    autoPlay: false,
   });
   useEffect(() => controls.volume(0.2), []);
 
