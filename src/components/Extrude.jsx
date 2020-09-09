@@ -1,8 +1,7 @@
 import React, { useMemo } from "react";
 import { Shape, Vector2, DoubleSide } from "three";
-import { Line } from ".";
 
-export const Polygon = (props) => {
+export const Extrude = (props) => {
   const points = props.points || [];
   const color = props.color || "white";
 
@@ -11,13 +10,12 @@ export const Polygon = (props) => {
     [points]
   );
 
+  const settings = { curveSegments: 12 };
+
   return (
-    <group {...props}>
-      <mesh>
-        <shapeGeometry attach="geometry" args={[vectorPoints]} />
-        <meshPhongMaterial attach="material" color={color} side={DoubleSide} />
-      </mesh>
-      {/* <Line points={points} /> */}
-    </group>
+    <mesh {...props}>
+      <extrudeGeometry attach="geometry" args={[vectorPoints, settings]} />
+      <meshBasicMaterial attach="material" color={color} side={DoubleSide} />
+    </mesh>
   );
 };

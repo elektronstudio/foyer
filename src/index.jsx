@@ -1,12 +1,20 @@
 import React, { Suspense, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { Canvas, useFrame } from "react-three-fiber";
+import { Canvas, useFrame, useThree } from "react-three-fiber";
 import { OrbitControls } from "drei";
 import { EffectComposer, Bloom, Glitch } from "react-postprocessing";
 import { GlitchMode } from "postprocessing";
 import { useAudio } from "react-use";
 
-import { Grid, Image, Line, Message, Polygon, Schedule } from "./components";
+import {
+  Grid,
+  Image,
+  Line,
+  Message,
+  Polygon,
+  Schedule,
+  Extrude,
+} from "./components";
 import { range, degToRad } from "./utils";
 import "./styles.css";
 
@@ -22,6 +30,16 @@ const App = () => {
   const [showSchedule, setShowSchedule] = useState(false);
   const numbers = range(-5, 5);
 
+  const { scene, renderer } = useThree();
+  if (typeof __THREE_DEVTOOLS__ !== "undefined") {
+    __THREE_DEVTOOLS__.dispatchEvent(
+      new CustomEvent("observe", { detail: scene })
+    );
+    __THREE_DEVTOOLS__.dispatchEvent(
+      new CustomEvent("observe", { detail: renderer })
+    );
+  }
+
   const [audio, state, controls, ref] = useAudio({
     src:
       "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Blue_Dressed_Man/Voidland_EP/Blue_Dressed_Man_-_01_-_welcome.mp3",
@@ -32,21 +50,25 @@ const App = () => {
   return (
     <>
       <div style={{ width: "100vw", height: "100vh" }}>
-        <Canvas invalidateFrameloop camera={{ position: [0, 3, 10] }}>
+        <Canvas
+          shadowMap={true}
+          invalidateFrameloop={false}
+          camera={{ position: [0, 3, 10] }}
+        >
           <ambientLight />
-          <pointLight position={[10, 10, 10]} />
-
+          <pointLight position={[-40, 40, 40]} />
+          <pointLight position={[40, 40, 40]} />
+          <fog color="white" near={0.1} />
           <Polygon
             points={rectPoints(10, 10)}
-            color="#333"
             rotation={[degToRad(-90), 0, 0]}
+            color="#111"
           />
-          <Line
+          <Polygon
             points={rectPoints(10, 10)}
-            color="white"
-            rotation={[degToRad(-90), 0, 0]}
+            position={[0, 5, 0]}
+            color="#111"
           />
-
           <EffectComposer>
             <Bloom
               luminanceThreshold={0.1}
