@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { Shape, Vector2, DoubleSide } from "three";
-import { Line } from ".";
+import { Line, MessageSmall } from ".";
 
 export const Polygon = (props) => {
   const points = props.points || [];
@@ -18,6 +18,11 @@ export const Polygon = (props) => {
         <meshPhongMaterial attach="material" color={color} side={DoubleSide} />
       </mesh>
       <Line points={points} />
+      {/* <MessageSmall position={[-1, 0, -0.1]} scale={[1, -1, 1]}>{`
+      Karl Saks
+      "Planet Alexithymia"
+      @Kanuti Gildi SAAL
+      `}</MessageSmall> */}
     </group>
   );
 };

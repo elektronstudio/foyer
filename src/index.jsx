@@ -16,6 +16,7 @@ import {
   Polygon,
   Schedule,
   Avatar,
+  MessageSmall,
 } from "./components";
 
 import {
@@ -46,6 +47,9 @@ import "./styles.css";
 
 //const extrudePoints = (points, depth) => points.map(p => [[p[0],p[1],0],[p[0],p[1],0])
 
+const text = `
+e_lektron on poolenisti virtuaalne, poolenisti füüsiline platvorm, mis liidab etenduskunstide ja teaduse otsingulisi tegevusi. e_lektroni sisu on kunstnike ja teadlaste koostöö.`;
+
 const Panels = ({ points }) => (
   <group rotation={[degToRad(-90), 0, 0]}>
     {pointsTransforms(points).map((p, i) => (
@@ -56,6 +60,14 @@ const Panels = ({ points }) => (
           points={rectPoints(p.width - 0.01, 3)}
           color="#111"
         />
+        {i === 8 && (
+          <MessageSmall
+            position={[-1.8, -0.1, 2.8]}
+            rotation={[degToRad(90), 0, 0]}
+          >
+            {text}
+          </MessageSmall>
+        )}
       </group>
     ))}
   </group>
@@ -66,8 +78,6 @@ const spheres = Array.from({ length: 50 }).map((_) => [
   random(1, 2),
   random(3, 10),
 ]);
-
-console.log(spheres);
 
 const App = () => {
   const [showSchedule, setShowSchedule] = useState(false);
@@ -92,7 +102,7 @@ const App = () => {
       <div style={{ width: "100vw", height: "100vh" }}>
         <Canvas
           invalidateFrameloop={true}
-          camera={{ position: [0, 2, 8], fov: 100 }}
+          camera={{ position: [0, 2, 7], fov: 100 }}
           onCreated={({ gl }) => {
             gl.shadowMap.enabled = true;
             gl.shadowMap.type = PCFSoftShadowMap;
