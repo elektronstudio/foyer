@@ -12,7 +12,7 @@ export const Avatar = (props) => {
       onPointerOver={() => setActive(true)}
       onPointerOut={() => setActive(false)}
       color={active ? "orange" : "yellow"}
-      scale={[active ? 1.2 : 1, active ? 1.2 : 1, active ? 1.2 : 1]}
+      scale={[active ? 1.5 : 1, active ? 1.5 : 1, active ? 1.5 : 1]}
     />
   );
 };
