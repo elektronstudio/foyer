@@ -11,7 +11,7 @@ export const Message = (props) => {
       lineHeight={1}
       letterSpacing={-0.01}
       textAlign={"left"}
-      font="/font-medium.woff"
+      font="/font-bold.woff"
       anchorX="center"
       anchorY="middle"
       {...props}

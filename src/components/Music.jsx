@@ -1,16 +1,13 @@
 import React, { useEffect } from "react";
 import { useAudio } from "react-use";
 
-// From https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Blue_Dressed_Man/Voidland_EP/Blue_Dressed_Man_-_01_-_welcome.mp3
-
 export const Music = () => {
   const [audio, state, controls, ref] = useAudio({
-    src: "./music.mp3",
-    autoplay: true,
+    src: "./what_about_people_our_age.mp3",
+    autoPlay: true,
+    loop: true,
   });
-  useEffect(() => {
-    controls.volume(0.2);
-  }, []);
+  useEffect(() => controls.play(), []);
 
   return (
     <>
@@ -23,6 +20,7 @@ export const Music = () => {
           color: "white",
           fontFamily: "sans-serif",
           cursor: "pointer",
+          zIndex: 1000,
         }}
         onClick={() => (state.paused ? controls.play() : controls.pause())}
       >

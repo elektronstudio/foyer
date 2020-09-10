@@ -75,6 +75,7 @@ const App = () => {
 
   return (
     <>
+      <Music />
       <div style={{ width: "100vw", height: "100vh" }}>
         <Canvas invalidateFrameloop={true} camera={{ position: [0, 2, 6] }}>
           <ambientLight />
@@ -128,7 +129,6 @@ const App = () => {
         {showSchedule && (
           <Schedule onClick={() => setShowSchedule(!showSchedule)} />
         )}
-        <Music />
       </div>
     </>
   );
