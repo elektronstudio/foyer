@@ -31,22 +31,6 @@ import {
 } from "./utils";
 import "./styles.css";
 
-// const pointTransforms = (points) => {
-//   let transforms = [];
-//   points.forEach((p, i) => {
-//     if (!!points[i + 1]) {
-//       transforms.push({
-//         position: [...pointsMidpoint(points[i], points[i + 1]), 0],
-//         angle: pointsAngle(points[i], points[i + 1]),
-//         width: pointsDistance(points[i], points[i + 1]),
-//       });
-//     }
-//   });
-//   return transforms;
-// };
-
-//const extrudePoints = (points, depth) => points.map(p => [[p[0],p[1],0],[p[0],p[1],0])
-
 const text = `
 e_lektron on poolenisti virtuaalne, poolenisti füüsiline platvorm, mis liidab etenduskunstide ja teaduse otsingulisi tegevusi. e_lektroni sisu on kunstnike ja teadlaste koostöö.`;
 
@@ -68,12 +52,23 @@ const Panels = ({ points }) => (
             {text}
           </MessageSmall>
         )}
+        {i === 7 && (
+          <Suspense fallback={null}>
+            <Image
+              src="/hexacoralia.jpg"
+              position={[0, -0.1, 1.5]}
+              rotation={[degToRad(90), 0, 0]}
+              scale={[1, 1, 1]}
+              opacity={0}
+            />
+          </Suspense>
+        )}
       </group>
     ))}
   </group>
 );
 
-const spheres = Array.from({ length: 50 }).map((_) => [
+const spheres = Array.from({ length: 100 }).map((_) => [
   random(-3, 3),
   random(1, 2),
   random(3, 10),
@@ -102,7 +97,7 @@ const App = () => {
       <div style={{ width: "100vw", height: "100vh" }}>
         <Canvas
           invalidateFrameloop={true}
-          camera={{ position: [0, 2, 7], fov: 100 }}
+          camera={{ position: [0, 2, 8], fov: 100 }}
           onCreated={({ gl }) => {
             gl.shadowMap.enabled = true;
             gl.shadowMap.type = PCFSoftShadowMap;
@@ -136,13 +131,7 @@ const App = () => {
             <Avatar key={i} position={s} radius={0.01} color="yellow" />
           ))}
           {/* <Sphere position={spheres[0]} radius={0.1} color="yellow" />} */}
-          <Suspense fallback={null}>
-            <Image
-              src="/hexacoralia.jpg"
-              position={[0, 20, 0]}
-              scale={[10, 10, 10]}
-            />
-          </Suspense>
+
           <EffectComposer>
             <Bloom
               luminanceThreshold={0.1}
