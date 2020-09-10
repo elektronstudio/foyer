@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { Shape, Vector2, DoubleSide } from "three";
-import { Line } from ".";
+import { Line2 } from "./Line2";
 
 export const Polygon = (props) => {
   const points = props.points || [];
@@ -17,7 +17,7 @@ export const Polygon = (props) => {
         <shapeGeometry attach="geometry" args={[vectorPoints]} />
         <meshPhongMaterial attach="material" color={color} side={DoubleSide} />
       </mesh>
-      <Line points={points} />
+      <Line2 points={points} />
     </group>
   );
 };
