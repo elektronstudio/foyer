@@ -5,7 +5,7 @@ export const MessageSmall = (props) => {
   const ref = useRef();
   return (
     <Text
-      color="#626262"
+      color="#777"
       fontSize={0.2}
       maxWidth={3}
       lineHeight={1.3}
