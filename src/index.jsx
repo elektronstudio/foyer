@@ -5,16 +5,19 @@ import { OrbitControls, Box } from "drei";
 import { EffectComposer, Bloom, Glitch } from "react-postprocessing";
 import { GlitchMode } from "postprocessing";
 import { useAudio } from "react-use";
+import { PCFSoftShadowMap } from "three";
 
 import {
   Grid,
   Image,
   Line,
   Message,
+  Music,
   Polygon,
   Schedule,
-  Music,
+  Avatar,
 } from "./components";
+
 import {
   range,
   degToRad,
@@ -23,6 +26,7 @@ import {
   pointsDistance,
   rectPoints,
   pointsTransforms,
+  random,
 } from "./utils";
 import "./styles.css";
 
@@ -57,6 +61,14 @@ const Panels = ({ points }) => (
   </group>
 );
 
+const spheres = Array.from({ length: 50 }).map((_) => [
+  random(-3, 3),
+  random(1, 2),
+  random(3, 10),
+]);
+
+console.log(spheres);
+
 const App = () => {
   const [showSchedule, setShowSchedule] = useState(false);
 
@@ -71,13 +83,21 @@ const App = () => {
     [0, -1],
     [1, -3],
     [5, -5],
+    [9, -6],
   ];
 
   return (
     <>
       <Music />
       <div style={{ width: "100vw", height: "100vh" }}>
-        <Canvas invalidateFrameloop={true} camera={{ position: [0, 2, 6] }}>
+        <Canvas
+          invalidateFrameloop={true}
+          camera={{ position: [0, 2, 8], fov: 100 }}
+          onCreated={({ gl }) => {
+            gl.shadowMap.enabled = true;
+            gl.shadowMap.type = PCFSoftShadowMap;
+          }}
+        >
           <ambientLight />
           <pointLight position={[-40, 40, 40]} />
           <pointLight position={[40, 40, 40]} />
@@ -101,7 +121,11 @@ const App = () => {
           >
             Live
           </Message>
-          <pointLight position={[-1, 2, 0]} color="green" />
+          {/* <pointLight position={[-1, 2, 0]} color="green" /> */}
+          {spheres.map((s, i) => (
+            <Avatar key={i} position={s} radius={0.01} color="yellow" />
+          ))}
+          {/* <Sphere position={spheres[0]} radius={0.1} color="yellow" />} */}
           <Suspense fallback={null}>
             <Image
               src="/hexacoralia.jpg"
