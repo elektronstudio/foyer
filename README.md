@@ -1,15 +1,19 @@
-## About
+### About
 
 **e⁻lektron foyer** is a prototype for a virtual foyer / venue for performing arts.
 
-## Installation and development
+### Demo
+
+https://elektron-foyer.netlify.app
+
+### Installation and development
 
 ```
 npm install
 npm run dev
 ```
 
-## Building for production
+### Building for production
 
 ```
 npm run build
