@@ -7,7 +7,7 @@ import { GlitchMode } from "postprocessing";
 import { useAudio } from "react-use";
 import { PCFSoftShadowMap } from "three";
 
-import { ThemeProvider, useTheme } from "./settings";
+import { SettingsProvider, useSettings } from "./settings";
 
 import {
   Grid,
@@ -93,6 +93,8 @@ const App = () => {
     [9, -6],
   ];
 
+  const { first, second } = useSettings();
+
   return (
     <>
       <Music />
@@ -160,8 +162,8 @@ const App = () => {
 };
 
 ReactDOM.render(
-  <ThemeProvider>
+  <SettingsProvider>
     <App />
-  </ThemeProvider>,
+  </SettingsProvider>,
   document.getElementById("root")
 );

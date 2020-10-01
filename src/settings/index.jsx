@@ -1,20 +1,19 @@
 import React, { createContext, useContext, useState } from "react";
 
-const ThemeContext = createContext({ first: 0 });
+const SettingsContext = createContext({ first: 0, second: 0 });
 
-export const ThemeProvider = ({ children }) => {
-  //  const [currentTheme] = useState(theme);
+export const SettingsProvider = ({ children }) => {
   const [first, setFirst] = useState(0);
   const [second, setSecond] = useState(0);
-  //const first = 1;
-  const value = { first };
+  const value = { first, second };
 
   return (
     <>
-      <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+      <SettingsContext.Provider value={value}>
+        {children}
+      </SettingsContext.Provider>
       <div
         style={{
-          border: "1px solid white",
           position: "fixed",
           top: 0,
           right: 0,
@@ -24,17 +23,28 @@ export const ThemeProvider = ({ children }) => {
           background: "rgba(50,50,50,0.5)",
           display: "grid",
           gap: "16px",
+          fontFamily: "sans-serif",
         }}
       >
+        <div>First: {first}</div>
         <input
           type="range"
+          step="0.00001"
+          max="1"
           value={first}
           onChange={(e) => setFirst(e.target.value)}
         />
-        {first}
+        <div>Second: {second}</div>
+        <input
+          type="range"
+          step="0.00001"
+          max="1"
+          value={second}
+          onChange={(e) => setSecond(e.target.value)}
+        />
       </div>
     </>
   );
 };
 
-export const useTheme = () => useContext(ThemeContext);
+export const useSettings = () => useContext(SettingsContext);
