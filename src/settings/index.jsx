@@ -29,7 +29,7 @@ export const SettingsProvider = ({ children }) => {
         <div>First: {first}</div>
         <input
           type="range"
-          step="0.00001"
+          step="0.01"
           max="1"
           value={first}
           onChange={(e) => setFirst(e.target.value)}
@@ -37,7 +37,7 @@ export const SettingsProvider = ({ children }) => {
         <div>Second: {second}</div>
         <input
           type="range"
-          step="0.00001"
+          step="0.01"
           max="1"
           value={second}
           onChange={(e) => setSecond(e.target.value)}
