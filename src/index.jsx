@@ -7,6 +7,8 @@ import { GlitchMode } from "postprocessing";
 import { useAudio } from "react-use";
 import { PCFSoftShadowMap } from "three";
 
+import { SettingsProvider, useSettings } from "./settings";
+
 import {
   Grid,
   Image,
@@ -91,6 +93,8 @@ const App = () => {
     [9, -6],
   ];
 
+  const { first, second } = useSettings();
+
   return (
     <>
       <Music />
@@ -112,12 +116,6 @@ const App = () => {
             rotation={[degToRad(-90), 0, 0]}
             color="#090909"
           />
-          {/* <Polygon
-            points={rectPoints(50, 55)}
-            position={[0, 3.1, 0]}
-            rotation={[degToRad(-90), 0, 0]}
-            color="#090909"
-          /> */}
           <Panels points={points} />
           <Message
             color="white"
@@ -126,12 +124,11 @@ const App = () => {
           >
             Live
           </Message>
-          {/* <pointLight position={[-1, 2, 0]} color="green" /> */}
+          <pointLight position={[-1, 2, 0]} color="green" />
           {spheres.map((s, i) => (
             <Avatar key={i} position={s} radius={0.01} color="yellow" />
           ))}
           {/* <Sphere position={spheres[0]} radius={0.1} color="yellow" />} */}
-
           <EffectComposer>
             <Bloom
               luminanceThreshold={0.1}
@@ -157,4 +154,9 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <SettingsProvider>
+    <App />
+  </SettingsProvider>,
+  document.getElementById("root")
+);

@@ -2,3 +2,24 @@ body {
   margin: 0;
   background: rgba(0, 0, 0, 0.9);
 }
+
+input[type="range"] {
+  display: block;
+  -webkit-appearance: none;
+  width: 100%;
+  background: white;
+  height: 2px;
+  position: relative;
+  outline: none;
+  margin: 8px 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 2px solid white;
+  height: 24px;
+  width: 24px;
+  border-radius: 100%;
+  background: gray;
+  cursor: pointer;
+}
