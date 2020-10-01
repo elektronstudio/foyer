@@ -7,6 +7,8 @@ import { GlitchMode } from "postprocessing";
 import { useAudio } from "react-use";
 import { PCFSoftShadowMap } from "three";
 
+import { ThemeProvider, useTheme } from "./settings";
+
 import {
   Grid,
   Image,
@@ -157,4 +159,9 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <ThemeProvider>
+    <App />
+  </ThemeProvider>,
+  document.getElementById("root")
+);
