@@ -18,11 +18,6 @@ export const Polygon = (props) => {
         <meshPhongMaterial attach="material" color={color} side={DoubleSide} />
       </mesh>
       <Line points={points} color="#ccc" />
-      {/* <MessageSmall position={[-1, 0, -0.1]} scale={[1, -1, 1]}>{`
-      Karl Saks
-      "Planet Alexithymia"
-      @Kanuti Gildi SAAL
-      `}</MessageSmall> */}
     </group>
   );
 };

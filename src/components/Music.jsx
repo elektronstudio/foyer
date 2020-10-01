@@ -4,10 +4,10 @@ import { useAudio } from "react-use";
 export const Music = () => {
   const [audio, state, controls, ref] = useAudio({
     src: "./what_about_people_our_age.mp3",
-    autoPlay: true,
+    autoPlay: false,
     loop: true,
   });
-  useEffect(() => controls.play(), []);
+  //useEffect(() => controls.play(), []);
 
   return (
     <>

@@ -19,6 +19,7 @@ import {
   Schedule,
   Avatar,
   MessageSmall,
+  Video,
 } from "./components";
 
 import {
@@ -93,14 +94,14 @@ const App = () => {
     [9, -6],
   ];
 
-  const { first, second } = useSettings();
+  // const { first, second } = useSettings();
 
   return (
     <>
       <Music />
       <div style={{ width: "100vw", height: "100vh" }}>
         <Canvas
-          invalidateFrameloop={true}
+          invalidateFrameloop={false}
           camera={{ position: [0, 2, 8], fov: 100 }}
           onCreated={({ gl }) => {
             gl.shadowMap.enabled = true;
@@ -128,7 +129,7 @@ const App = () => {
           {spheres.map((s, i) => (
             <Avatar key={i} position={s} radius={0.01} color="yellow" />
           ))}
-          {/* <Sphere position={spheres[0]} radius={0.1} color="yellow" />} */}
+          <Video position={[0, 1, 7]} />
           <EffectComposer>
             <Bloom
               luminanceThreshold={0.1}
