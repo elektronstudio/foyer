@@ -129,7 +129,7 @@ const App = () => {
           {spheres.map((s, i) => (
             <Avatar key={i} position={s} radius={0.01} color="yellow" />
           ))}
-          <Video position={[0, 1, 7]} />
+          <Video position={[0, 1, 7]} scale={[2, 2, 2]} />
           <EffectComposer>
             <Bloom
               luminanceThreshold={0.1}

@@ -2,7 +2,8 @@ import React from "react";
 import * as THREE from "three";
 
 export const Video = (props) => {
-  const url = "/videos/1.mp4";
+  const url =
+    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 
   const video = document.createElement("video");
   video.loop = true;
