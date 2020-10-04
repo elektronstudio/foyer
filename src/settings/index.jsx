@@ -34,18 +34,30 @@ export const SettingsProvider = ({ children, settings: settingsFields }) => {
               <div key={i} style={{ marginBottom: "16px" }}>
                 <div style={{ marginBottom: "8px" }}>
                   {field.title}{" "}
-                  {field.type !== "text" ? settings[field.key] : ""}
+                  {field.type !== "text" && field.type !== "textarea"
+                    ? settings[field.key]
+                    : ""}
                 </div>
-                <input
-                  type={field.type}
-                  value={settings[field.key]}
-                  min={field.min || 0}
-                  max={field.max || 0}
-                  step={field.step || 0}
-                  onChange={(e) =>
-                    setSettings({ ...settings, [field.key]: e.target.value })
-                  }
-                />
+                {field.type !== "textarea" ? (
+                  <input
+                    type={field.type}
+                    value={settings[field.key]}
+                    min={field.min || 0}
+                    max={field.max || 0}
+                    step={field.step || 0}
+                    onChange={(e) =>
+                      setSettings({ ...settings, [field.key]: e.target.value })
+                    }
+                  />
+                ) : (
+                  <textarea
+                    value={settings[field.key]}
+                    rows={field.rows || 2}
+                    onChange={(e) =>
+                      setSettings({ ...settings, [field.key]: e.target.value })
+                    }
+                  />
+                )}
               </div>
             ))}
           </div>

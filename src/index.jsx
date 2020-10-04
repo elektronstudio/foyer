@@ -120,7 +120,7 @@ const settings = [
     title: "Panel offset",
     type: "range",
     value: 0,
-    min: -3.1,
+    min: -3.2,
     max: 0,
     step: 0.1,
   },
@@ -130,10 +130,10 @@ const settings = [
     type: "range",
     value: -3.1,
     min: -3.1,
-    max: 2,
+    max: 1.5,
     step: 0.1,
   },
-  { key: "text", title: "Text", type: "text", value: "what" },
+  { key: "text", title: "Text", type: "textarea", rows: 5, value: "what" },
 ];
 
 ReactDOM.render(

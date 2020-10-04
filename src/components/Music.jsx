@@ -14,7 +14,7 @@ export const Music = () => {
       <div
         style={{
           position: "fixed",
-          right: 0,
+          right: "left",
           bottom: 0,
           padding: "10px",
           color: "white",

@@ -2,6 +2,16 @@ body {
   margin: 0;
 }
 
+input[type="text"],
+textarea {
+  font-family: sans-serif;
+  padding: 8px;
+  outline: none;
+  border: 1px solid gray;
+  background: black;
+  color: white;
+}
+
 input[type="range"] {
   display: block;
   -webkit-appearance: none;
