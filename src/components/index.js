@@ -13,3 +13,4 @@ export * from "./Polygon";
 export * from "./Schedule";
 export * from "./Sphere";
 export * from "./Video";
+export * from "./VideoEmpty";

@@ -21,6 +21,7 @@ import {
   Polygon,
   Schedule,
   Video,
+  VideoEmpty,
 } from "./components";
 
 import {
@@ -42,11 +43,11 @@ const App = () => {
   const [backgroundColor, setBackgroundColor] = useState("#111111");
   const [panelColor, setPanelColor] = useState("#111111");
   const [lineColor, setLineColor] = useState("#cccccc");
-  const [offset, setOffset] = useState(0);
+  const [panelsOffset, setPanelsOffset] = useState(0);
   const [text, setText] = useState(defaultText);
 
   //const panels = useRef();
-  //useFrame(() => (panels.current.position.y = offset));
+  //useFrame(() => (panels.current.position.y = panelsOffset));
 
   return (
     <>
@@ -69,13 +70,13 @@ const App = () => {
             color={panelColor}
             lineColor={lineColor}
           />
-          <group position-y={offset}>
+          <group position-y={panelsOffset}>
             <Panels color={panelColor} text={text} lineColor={lineColor} />
+            <Message color="white" position={[-1, 1.5, 0]}>
+              Live
+            </Message>
           </group>
-          <Message color="white" position={[-1, 1.5, 0]}>
-            Live
-          </Message>
-          {/* <Video position={[0, 1, 7]} scale={[2, 2, 2]} /> */}
+          <VideoEmpty position={[-1, 4 - panelsOffset, 0]} scale={[2, 2, 2]} />
           <Avatars />
           <OrbitControls />
           <Lights />
@@ -118,14 +119,14 @@ const App = () => {
           onChange={(e) => setLineColor(e.target.value)}
           style={{ display: "block", width: "100%" }}
         />
-        <div>Offset: {offset}</div>
+        <div>Offset: {panelsOffset}</div>
         <input
           type="range"
-          min="-3"
-          max="3"
-          step="0.01"
-          value={offset}
-          onChange={(e) => setOffset(e.target.value)}
+          min="-3.5"
+          max="10"
+          step="0.1"
+          value={panelsOffset}
+          onChange={(e) => setPanelsOffset(e.target.value)}
           style={{ display: "block", width: "100%" }}
         />
         <div>Text:</div>
