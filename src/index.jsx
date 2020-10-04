@@ -101,7 +101,7 @@ const App = () => {
       <Music />
       <div style={{ width: "100vw", height: "100vh" }}>
         <Canvas
-          invalidateFrameloop={false}
+          invalidateFrameloop={true}
           camera={{ position: [0, 2, 8], fov: 100 }}
           onCreated={({ gl }) => {
             gl.shadowMap.enabled = true;

@@ -4,7 +4,9 @@ import Hls from "hls.js";
 export const Video = (props) => {
   //const url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 
-  const url = `https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8`;
+  //const url = `https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8`;
+
+  const url = `https://elektron-live.babahhcdn.com/bb1150-le/emp/index.m3u8`;
 
   const video = document.createElement("video");
   video.loop = true;

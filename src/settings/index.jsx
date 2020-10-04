@@ -12,7 +12,7 @@ export const SettingsProvider = ({ children }) => {
       <SettingsContext.Provider value={value}>
         {children}
       </SettingsContext.Provider>
-      {false && (
+      {true && (
         <div
           style={{
             position: "fixed",
