@@ -5,7 +5,7 @@ import { Line, MessageSmall } from ".";
 
 export const Polygon = (props) => {
   const points = props.points || [];
-  const color = props.color || "white";
+  const color = props.color || "#fffffff";
 
   const vectorPoints = useMemo(
     () => new Shape().setFromPoints(points.map((p) => new Vector2(p[0], p[1]))),
@@ -26,7 +26,7 @@ export const Polygon = (props) => {
           side={DoubleSide}
         />
       </mesh>
-      <Line points={points} color="red" />
+      <Line points={points} color={props.lineColor || "#ffffff"} />
     </group>
   );
 };

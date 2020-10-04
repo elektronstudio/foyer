@@ -1,6 +1,6 @@
-import React, { useMemo, useCallback } from "react";
-import { useThree, useResource } from "react-three-fiber";
-import { Vector3 } from "three";
+import React, { useMemo, useCallback, useEffect, useRef } from "react";
+import { useThree, useResource, useFrame } from "react-three-fiber";
+import { Vector3, Color } from "three";
 
 export const Line = (props) => {
   const [ref] = useResource();
@@ -12,13 +12,15 @@ export const Line = (props) => {
     vectorPoints,
   ]);
 
-  console.log(props.color);
+  const material = useRef();
+  useFrame(() => (material.current.color = new Color(props.color)));
 
   return (
     <>
       <line ref={ref} {...props}>
         <bufferGeometry attach="geometry" onUpdate={onUpdate} />
         <lineBasicMaterial
+          ref={material}
           attach="material"
           color={props.color}
           linewidth={1000}

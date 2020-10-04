@@ -39,13 +39,21 @@ const defaultText = `
 e_lektron on poolenisti virtuaalne, poolenisti füüsiline platvorm, mis liidab etenduskunstide ja teaduse otsingulisi tegevusi. e_lektroni sisu on kunstnike ja teadlaste koostöö.`;
 
 const App = () => {
-  const [first, setFirst] = useState("#111111");
+  const [backgroundColor, setBackgroundColor] = useState("#111111");
+  const [panelColor, setPanelColor] = useState("#111111");
+  const [lineColor, setLineColor] = useState("#cccccc");
+  const [offset, setOffset] = useState(0);
   const [text, setText] = useState(defaultText);
+
+  //const panels = useRef();
+  //useFrame(() => (panels.current.position.y = offset));
 
   return (
     <>
       <Music />
-      <div style={{ width: "100vw", height: "100vh" }}>
+      <div
+        style={{ width: "100vw", height: "100vh", background: backgroundColor }}
+      >
         <Canvas
           invalidateFrameloop={true}
           camera={{ position: [0, 2, 8], fov: 100 }}
@@ -58,10 +66,12 @@ const App = () => {
             points={rectPoints(50, 50)}
             position={[0, -0.1, 0]}
             rotation={[degToRad(-90), 0, 0]}
-            color="#090909"
-            borderColor="#ffffff"
+            color={panelColor}
+            lineColor={lineColor}
           />
-          <Panels color={first} text={text} />
+          <group position-y={offset}>
+            <Panels color={panelColor} text={text} lineColor={lineColor} />
+          </group>
           <Message color="white" position={[-1, 1.5, 0]}>
             Live
           </Message>
@@ -86,11 +96,37 @@ const App = () => {
           fontFamily: "sans-serif",
         }}
       >
-        <div>First: {first}</div>
+        <h4>Color</h4>
+        <div>Background color: {backgroundColor}</div>
         <input
           type="color"
-          value={first}
-          onChange={(e) => setFirst(e.target.value)}
+          value={backgroundColor}
+          onChange={(e) => setBackgroundColor(e.target.value)}
+          style={{ display: "block", width: "100%" }}
+        />
+        <div>Panel color: {panelColor}</div>
+        <input
+          type="color"
+          value={panelColor}
+          onChange={(e) => setPanelColor(e.target.value)}
+          style={{ display: "block", width: "100%" }}
+        />
+        <div>Line color: {lineColor}</div>
+        <input
+          type="color"
+          value={lineColor}
+          onChange={(e) => setLineColor(e.target.value)}
+          style={{ display: "block", width: "100%" }}
+        />
+        <div>Offset: {offset}</div>
+        <input
+          type="range"
+          min="-3"
+          max="3"
+          step="0.01"
+          value={offset}
+          onChange={(e) => setOffset(e.target.value)}
+          style={{ display: "block", width: "100%" }}
         />
         <div>Text:</div>
         <input

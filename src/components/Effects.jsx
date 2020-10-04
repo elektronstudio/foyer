@@ -6,7 +6,7 @@ import { GlitchMode } from "postprocessing";
 export const Effects = () => (
   <>
     <EffectComposer>
-      <Bloom luminanceThreshold={0.1} luminanceSmoothing={0.9} height={300} />
+      <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={100} />
       <Glitch
         delay={[3, 6]}
         duration={[0.1, 0.2]}

@@ -27,7 +27,7 @@ const points = [
   [9, -6],
 ];
 
-export const Panels = ({ color, text }) => (
+export const Panels = ({ color, lineColor, text }) => (
   <group rotation={[degToRad(-90), 0, 0]}>
     {pointsTransforms(points).map((p, i) => (
       <group key={i} position={p.position} rotation={[0, 0, p.angle]}>
@@ -36,6 +36,7 @@ export const Panels = ({ color, text }) => (
           rotation={[degToRad(-90), 0, 0]}
           points={rectPoints(p.width - 0.01, 3)}
           color={color}
+          lineColor={lineColor}
         />
         {i === 8 && (
           <MessageSmall
