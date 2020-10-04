@@ -22,3 +22,15 @@ input[type="range"]::-webkit-slider-thumb {
   background: gray;
   cursor: pointer;
 }
+
+input[type="color"] {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 16px;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+}

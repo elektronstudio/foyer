@@ -82,7 +82,10 @@ const App = () => {
               Live
             </Message>
           </group>
-          <VideoEmpty position={[-1, 4 - panelsOffset, 0]} scale={[2, 2, 2]} />
+          <VideoEmpty
+            position={[-1, settings.videoOffset, 0]}
+            scale={[5, 5, 5]}
+          />
           <Avatars />
           <OrbitControls />
           <Lights />
@@ -119,6 +122,15 @@ const settings = [
     value: 0,
     min: -3.1,
     max: 0,
+    step: 0.1,
+  },
+  {
+    key: "videoOffset",
+    title: "Video offset",
+    type: "range",
+    value: -3.1,
+    min: -3.1,
+    max: 2,
     step: 0.1,
   },
   { key: "text", title: "Text", type: "text", value: "what" },
