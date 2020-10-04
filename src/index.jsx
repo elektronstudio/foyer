@@ -44,16 +44,22 @@ const App = () => {
   const [panelColor, setPanelColor] = useState("#111111");
   const [lineColor, setLineColor] = useState("#cccccc");
   const [panelsOffset, setPanelsOffset] = useState(0);
-  const [text, setText] = useState(defaultText);
+  //const [text, setText] = useState(defaultText);
 
   //const panels = useRef();
   //useFrame(() => (panels.current.position.y = panelsOffset));
+
+  const { settings, setSettings } = useSettings();
 
   return (
     <>
       <Music />
       <div
-        style={{ width: "100vw", height: "100vh", background: backgroundColor }}
+        style={{
+          width: "100vw",
+          height: "100vh",
+          background: settings.backgroundColor,
+        }}
       >
         <Canvas
           invalidateFrameloop={true}
@@ -71,7 +77,11 @@ const App = () => {
             lineColor={lineColor}
           />
           <group position-y={panelsOffset}>
-            <Panels color={panelColor} text={text} lineColor={lineColor} />
+            <Panels
+              color={panelColor}
+              text={settings.text}
+              lineColor={lineColor}
+            />
             <Message color="white" position={[-1, 1.5, 0]}>
               Live
             </Message>
@@ -97,14 +107,14 @@ const App = () => {
           fontFamily: "sans-serif",
         }}
       >
-        <h4>Color</h4>
+        {/* <h4>Color</h4>
         <div>Background color: {backgroundColor}</div>
         <input
           type="color"
           value={backgroundColor}
           onChange={(e) => setBackgroundColor(e.target.value)}
           style={{ display: "block", width: "100%" }}
-        />
+        /> */}
         <div>Panel color: {panelColor}</div>
         <input
           type="color"
@@ -130,7 +140,7 @@ const App = () => {
           style={{ display: "block", width: "100%" }}
         />
         <div>Text:</div>
-        <input
+        {/* <input
           style={{
             padding: "5px",
             outline: "none",
@@ -138,16 +148,26 @@ const App = () => {
             color: "white",
             border: "1px solid gray",
           }}
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
+          value={settings.text}
+          onChange={(e) => setSettings({ ...settings, text: e.target.value })}
+        /> */}
       </div>
     </>
   );
 };
 
+const settings = [
+  {
+    key: "backgroundColor",
+    type: "color",
+    title: "Background color",
+    value: "#111111",
+  },
+  { key: "text", title: "Text", type: "text", value: "what" },
+];
+
 ReactDOM.render(
-  <SettingsProvider>
+  <SettingsProvider settings={settings}>
     <App />
   </SettingsProvider>,
   document.getElementById("root")

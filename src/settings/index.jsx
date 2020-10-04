@@ -1,23 +1,23 @@
 import React, { createContext, useContext, useState } from "react";
 
-const SettingsContext = createContext({ first: 0, second: 0 });
+const SettingsContext = createContext();
 
-export const SettingsProvider = ({ children }) => {
-  const [first, setFirst] = useState(0);
-  const [second, setSecond] = useState(0);
-  const value = { first, second };
-
+export const SettingsProvider = ({ children, settings: settingsFields }) => {
+  const state = Object.fromEntries(
+    settingsFields.map(({ key, value }) => [key, value])
+  );
+  const [settings, setSettings] = useState(state);
   return (
     <>
-      <SettingsContext.Provider value={value}>
+      <SettingsContext.Provider value={{ settings, setSettings }}>
         {children}
       </SettingsContext.Provider>
-      {false && (
+      {true && (
         <div
           style={{
             position: "fixed",
             top: 0,
-            right: 0,
+            left: 0,
             width: "200px",
             color: "white",
             padding: "16px",
@@ -27,22 +27,18 @@ export const SettingsProvider = ({ children }) => {
             fontFamily: "sans-serif",
           }}
         >
-          <div>First: {first}</div>
-          <input
-            type="range"
-            step="0.01"
-            max="1"
-            value={first}
-            onChange={(e) => setFirst(e.target.value)}
-          />
-          <div>Second: {second}</div>
-          <input
-            type="range"
-            step="0.01"
-            max="1"
-            value={second}
-            onChange={(e) => setSecond(e.target.value)}
-          />
+          {settingsFields.map((field, i) => (
+            <div key={i} style={{ marginBottom: "7px" }}>
+              <div style={{ marginBottom: "5px" }}>{field.title}</div>
+              <input
+                type={field.type}
+                value={settings[field.key]}
+                onChange={(e) =>
+                  setSettings({ ...settings, [field.key]: e.target.value })
+                }
+              />
+            </div>
+          ))}
         </div>
       )}
     </>
