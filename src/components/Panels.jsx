@@ -30,7 +30,7 @@ const points = [
 const text = `
 e_lektron on poolenisti virtuaalne, poolenisti füüsiline platvorm, mis liidab etenduskunstide ja teaduse otsingulisi tegevusi. e_lektroni sisu on kunstnike ja teadlaste koostöö.`;
 
-export const Panels = () => (
+export const Panels = ({ color }) => (
   <group rotation={[degToRad(-90), 0, 0]}>
     {pointsTransforms(points).map((p, i) => (
       <group key={i} position={p.position} rotation={[0, 0, p.angle]}>
@@ -38,7 +38,7 @@ export const Panels = () => (
           position={[0, 0, 1.5]}
           rotation={[degToRad(-90), 0, 0]}
           points={rectPoints(p.width - 0.01, 3)}
-          color="#111"
+          color={color}
         />
         {i === 8 && (
           <MessageSmall

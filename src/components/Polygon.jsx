@@ -1,5 +1,6 @@
-import React, { useMemo } from "react";
-import { Shape, Vector2, DoubleSide } from "three";
+import React, { useMemo, useRef } from "react";
+import { useFrame } from "react-three-fiber";
+import { Shape, Vector2, DoubleSide, Color } from "three";
 import { Line, MessageSmall } from ".";
 
 export const Polygon = (props) => {
@@ -11,11 +12,19 @@ export const Polygon = (props) => {
     [points]
   );
 
+  const material = useRef();
+  useFrame(() => (material.current.color = new Color(props.color)));
+
   return (
     <group {...props}>
       <mesh>
         <shapeGeometry attach="geometry" args={[vectorPoints]} />
-        <meshPhongMaterial attach="material" color={color} side={DoubleSide} />
+        <meshPhongMaterial
+          ref={material}
+          attach="material"
+          color={color}
+          side={DoubleSide}
+        />
       </mesh>
       <Line points={points} color="#ccc" />
     </group>

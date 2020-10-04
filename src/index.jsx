@@ -37,8 +37,7 @@ import "./styles.css";
 
 const App = () => {
   const [showSchedule, setShowSchedule] = useState(false);
-
-  // const { first, second } = useSettings();
+  const [first, setFirst] = useState("#ff0000");
 
   return (
     <>
@@ -52,16 +51,37 @@ const App = () => {
             gl.shadowMap.type = PCFSoftShadowMap;
           }}
         >
-          <Panels />
+          <Panels color={first} />
           <Message color="white" position={[-1, 1.5, 0]}>
             Live
           </Message>
-          <Video position={[0, 1, 7]} scale={[2, 2, 2]} />
+          {/* <Video position={[0, 1, 7]} scale={[2, 2, 2]} /> */}
           <Avatars />
           <OrbitControls />
           <Lights />
           <Effects />
         </Canvas>
+      </div>
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          right: 0,
+          width: "200px",
+          color: "white",
+          padding: "16px",
+          background: "rgba(50,50,50,0.5)",
+          display: "grid",
+          gap: "16px",
+          fontFamily: "sans-serif",
+        }}
+      >
+        <div>First: {first}</div>
+        <input
+          type="color"
+          value={first}
+          onChange={(e) => setFirst(e.target.value)}
+        />
       </div>
     </>
   );
