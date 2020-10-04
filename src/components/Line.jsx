@@ -5,21 +5,23 @@ import { Vector3 } from "three";
 export const Line = (props) => {
   const [ref] = useResource();
   const points = props.points || [];
-  const color = props.color || "white";
 
   const vectorPoints = useMemo(() => points.map((p) => new Vector3(...p)), []);
 
   const onUpdate = useCallback((self) => self.setFromPoints(vectorPoints), [
     vectorPoints,
   ]);
+
+  console.log(props.color);
+
   return (
     <>
       <line ref={ref} {...props}>
         <bufferGeometry attach="geometry" onUpdate={onUpdate} />
         <lineBasicMaterial
           attach="material"
-          color={color}
-          linewidth={100}
+          color={props.color}
+          linewidth={1000}
           linecap={"round"}
           linejoin={"round"}
         />

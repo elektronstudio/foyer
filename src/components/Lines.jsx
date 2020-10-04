@@ -3,7 +3,7 @@ import { useFrame } from "react-three-fiber";
 import { Shape, Vector2, DoubleSide, Color } from "three";
 import { Line, MessageSmall } from ".";
 
-export const Polygon = (props) => {
+export const Lines = (props) => {
   const points = props.points || [];
   const color = props.color || "white";
 
@@ -13,7 +13,7 @@ export const Polygon = (props) => {
   );
 
   const material = useRef();
-  //useFrame(() => (material.current.color = new Color(props.color)));
+  useFrame(() => (material.current.color = new Color(props.color)));
 
   return (
     <group {...props}>

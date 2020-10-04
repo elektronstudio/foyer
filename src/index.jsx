@@ -35,9 +35,12 @@ import {
 } from "./utils";
 import "./styles.css";
 
+const defaultText = `
+e_lektron on poolenisti virtuaalne, poolenisti füüsiline platvorm, mis liidab etenduskunstide ja teaduse otsingulisi tegevusi. e_lektroni sisu on kunstnike ja teadlaste koostöö.`;
+
 const App = () => {
-  const [showSchedule, setShowSchedule] = useState(false);
-  const [first, setFirst] = useState("#ff0000");
+  const [first, setFirst] = useState("#111111");
+  const [text, setText] = useState(defaultText);
 
   return (
     <>
@@ -51,7 +54,14 @@ const App = () => {
             gl.shadowMap.type = PCFSoftShadowMap;
           }}
         >
-          <Panels color={first} />
+          <Polygon
+            points={rectPoints(50, 50)}
+            position={[0, -0.1, 0]}
+            rotation={[degToRad(-90), 0, 0]}
+            color="#090909"
+            borderColor="#ffffff"
+          />
+          <Panels color={first} text={text} />
           <Message color="white" position={[-1, 1.5, 0]}>
             Live
           </Message>
@@ -81,6 +91,18 @@ const App = () => {
           type="color"
           value={first}
           onChange={(e) => setFirst(e.target.value)}
+        />
+        <div>Text:</div>
+        <input
+          style={{
+            padding: "5px",
+            outline: "none",
+            background: "black",
+            color: "white",
+            border: "1px solid gray",
+          }}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
         />
       </div>
     </>
