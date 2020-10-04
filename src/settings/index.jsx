@@ -17,22 +17,26 @@ export const SettingsProvider = ({ children, settings: settingsFields }) => {
           style={{
             position: "fixed",
             top: 0,
-            left: 0,
+            right: 0,
+            overflow: "auto",
             width: "200px",
             color: "white",
             padding: "16px",
             background: "rgba(50,50,50,0.5)",
-            display: "grid",
-            gap: "16px",
             fontFamily: "sans-serif",
           }}
         >
           {settingsFields.map((field, i) => (
-            <div key={i} style={{ marginBottom: "7px" }}>
-              <div style={{ marginBottom: "5px" }}>{field.title}</div>
+            <div key={i} style={{ marginBottom: "16px" }}>
+              <div style={{ marginBottom: "8px" }}>
+                {field.title} {field.type !== "text" ? settings[field.key] : ""}
+              </div>
               <input
                 type={field.type}
                 value={settings[field.key]}
+                min={field.min || 0}
+                max={field.max || 0}
+                step={field.step || 0}
                 onChange={(e) =>
                   setSettings({ ...settings, [field.key]: e.target.value })
                 }

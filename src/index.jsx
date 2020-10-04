@@ -44,12 +44,8 @@ const App = () => {
   const [panelColor, setPanelColor] = useState("#111111");
   const [lineColor, setLineColor] = useState("#cccccc");
   const [panelsOffset, setPanelsOffset] = useState(0);
-  //const [text, setText] = useState(defaultText);
 
-  //const panels = useRef();
-  //useFrame(() => (panels.current.position.y = panelsOffset));
-
-  const { settings, setSettings } = useSettings();
+  const { settings } = useSettings();
 
   return (
     <>
@@ -73,14 +69,14 @@ const App = () => {
             points={rectPoints(50, 50)}
             position={[0, -0.1, 0]}
             rotation={[degToRad(-90), 0, 0]}
-            color={panelColor}
-            lineColor={lineColor}
+            color={settings.panelColor}
+            lineColor={settings.lineColor}
           />
-          <group position-y={panelsOffset}>
+          <group position-y={settings.panelOffset}>
             <Panels
-              color={panelColor}
+              color={settings.panelColor}
               text={settings.text}
-              lineColor={lineColor}
+              lineColor={settings.lineColor}
             />
             <Message color="white" position={[-1, 1.5, 0]}>
               Live
@@ -93,65 +89,6 @@ const App = () => {
           <Effects />
         </Canvas>
       </div>
-      <div
-        style={{
-          position: "fixed",
-          top: 0,
-          right: 0,
-          width: "200px",
-          color: "white",
-          padding: "16px",
-          background: "rgba(50,50,50,0.5)",
-          display: "grid",
-          gap: "16px",
-          fontFamily: "sans-serif",
-        }}
-      >
-        {/* <h4>Color</h4>
-        <div>Background color: {backgroundColor}</div>
-        <input
-          type="color"
-          value={backgroundColor}
-          onChange={(e) => setBackgroundColor(e.target.value)}
-          style={{ display: "block", width: "100%" }}
-        /> */}
-        <div>Panel color: {panelColor}</div>
-        <input
-          type="color"
-          value={panelColor}
-          onChange={(e) => setPanelColor(e.target.value)}
-          style={{ display: "block", width: "100%" }}
-        />
-        <div>Line color: {lineColor}</div>
-        <input
-          type="color"
-          value={lineColor}
-          onChange={(e) => setLineColor(e.target.value)}
-          style={{ display: "block", width: "100%" }}
-        />
-        <div>Offset: {panelsOffset}</div>
-        <input
-          type="range"
-          min="-3.5"
-          max="10"
-          step="0.1"
-          value={panelsOffset}
-          onChange={(e) => setPanelsOffset(e.target.value)}
-          style={{ display: "block", width: "100%" }}
-        />
-        <div>Text:</div>
-        {/* <input
-          style={{
-            padding: "5px",
-            outline: "none",
-            background: "black",
-            color: "white",
-            border: "1px solid gray",
-          }}
-          value={settings.text}
-          onChange={(e) => setSettings({ ...settings, text: e.target.value })}
-        /> */}
-      </div>
     </>
   );
 };
@@ -159,9 +96,30 @@ const App = () => {
 const settings = [
   {
     key: "backgroundColor",
-    type: "color",
     title: "Background color",
+    type: "color",
     value: "#111111",
+  },
+  {
+    key: "panelColor",
+    title: "Panel color",
+    type: "color",
+    value: "#111111",
+  },
+  {
+    key: "lineColor",
+    title: "Line color",
+    type: "color",
+    value: "#cccccc",
+  },
+  {
+    key: "panelOffset",
+    title: "Panel offset",
+    type: "range",
+    value: 0,
+    min: -3.1,
+    max: 0,
+    step: 0.1,
   },
   { key: "text", title: "Text", type: "text", value: "what" },
 ];
