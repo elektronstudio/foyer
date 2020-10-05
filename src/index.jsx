@@ -106,11 +106,23 @@ const App = () => {
               {settings.text2}
             </Message>
           </group>
-          <VideoEmpty
-            position={[-1, settings.videoOffset, 0]}
-            scale={[5, 5, 5]}
-          />
-          <Avatars type={settings.avatarType} color={settings.avatarColor} />
+
+          <group
+            scale={[
+              settings.panelScale,
+              settings.panelScale,
+              settings.panelScale,
+            ]}
+          >
+            <VideoEmpty
+              position={[-1, settings.videoOffset, 0]}
+              scale={[5, 5, 5]}
+            />
+          </group>
+
+          <group position-y={settings.avatarOffset}>
+            <Avatars type={settings.avatarType} color={settings.avatarColor} />
+          </group>
           <OrbitControls enablePan={false} />
           <Camera position={[0 + c.x / 2, 2 + c.y / 2, 15 + c.z / 2]} />
           <Lights color={settings.lightColor} />
@@ -135,15 +147,6 @@ const settings = [
     value: "#111111",
   },
   {
-    key: "panelScale",
-    title: "Panel scale",
-    type: "range",
-    value: 1,
-    min: 1,
-    max: 3,
-    step: 0.01,
-  },
-  {
     key: "lightColor",
     title: "Light color",
     type: "color",
@@ -160,7 +163,7 @@ const settings = [
     title: "Panel offset",
     type: "range",
     value: 0,
-    min: -3.2,
+    min: -10,
     max: 0,
     step: 0.1,
   },
@@ -169,8 +172,17 @@ const settings = [
     title: "Video offset",
     type: "range",
     value: -3.1,
-    min: -3.1,
+    min: -10,
     max: 1.5,
+    step: 0.1,
+  },
+  {
+    key: "avatarOffset",
+    title: "Avatar offset",
+    type: "range",
+    value: -3.2,
+    min: -10,
+    max: 0,
     step: 0.1,
   },
   {
@@ -214,6 +226,15 @@ const settings = [
     title: "Avatar color",
     type: "color",
     value: "#ffff00",
+  },
+  {
+    key: "panelScale",
+    title: "Panel scale",
+    type: "range",
+    value: 1,
+    min: 1,
+    max: 3,
+    step: 0.01,
   },
 ];
 

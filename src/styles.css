@@ -44,3 +44,9 @@ input[type="color"]::-webkit-color-swatch-wrapper {
 input[type="color"]::-webkit-color-swatch {
   border: none;
 }
+
+input,
+textarea {
+  width: 100%;
+  line-height: 1.5em;
+}

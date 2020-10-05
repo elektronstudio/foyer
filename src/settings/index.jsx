@@ -23,9 +23,9 @@ export const SettingsProvider = ({ children, settings: settingsFields }) => {
               right: 0,
               bottom: 0,
               overflow: "auto",
-              width: "200px",
+              width: "250px",
               color: "white",
-              padding: "24px",
+              padding: "32px",
               background: "rgba(30,30,30,0.5)",
               fontFamily: "sans-serif",
             }}
