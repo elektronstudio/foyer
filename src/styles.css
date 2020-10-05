@@ -1,6 +1,15 @@
 body {
   margin: 0;
-  background: rgba(0, 0, 0, 0.9);
+}
+
+input[type="text"],
+textarea {
+  font-family: sans-serif;
+  padding: 8px;
+  outline: none;
+  border: 1px solid gray;
+  background: black;
+  color: white;
 }
 
 input[type="range"] {
@@ -22,4 +31,22 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 100%;
   background: gray;
   cursor: pointer;
+}
+
+input[type="color"] {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 16px;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+}
+
+input,
+textarea {
+  width: 100%;
+  line-height: 1.5em;
 }

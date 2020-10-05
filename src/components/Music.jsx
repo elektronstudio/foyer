@@ -4,17 +4,23 @@ import { useAudio } from "react-use";
 export const Music = () => {
   const [audio, state, controls, ref] = useAudio({
     src: "./what_about_people_our_age.mp3",
-    autoPlay: true,
+    autoPlay: false,
     loop: true,
   });
-  useEffect(() => controls.play(), []);
+  const [audio2, state2, controls2, ref2] = useAudio({
+    src: "./crowd.mp3",
+    autoPlay: false,
+    loop: true,
+  });
+
+  useEffect(() => controls2.volume(0.25), []);
 
   return (
     <>
       <div
         style={{
           position: "fixed",
-          right: 0,
+          right: "left",
           bottom: 0,
           padding: "10px",
           color: "white",
@@ -22,11 +28,20 @@ export const Music = () => {
           cursor: "pointer",
           zIndex: 1000,
         }}
-        onClick={() => (state.paused ? controls.play() : controls.pause())}
       >
-        {state.paused ? "▶" : "❚❚"}
+        <div
+          onClick={() => (state.paused ? controls.play() : controls.pause())}
+        >
+          {state.paused ? "▶" : "❚❚"}
+        </div>
+        <div
+          onClick={() => (state2.paused ? controls2.play() : controls2.pause())}
+        >
+          {state2.paused ? "▶" : "❚❚"}
+        </div>
       </div>
       {audio}
+      {audio2}
     </>
   );
 };
