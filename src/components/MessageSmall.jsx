@@ -2,11 +2,10 @@ import React, { useRef } from "react";
 import { Text } from "drei";
 
 export const MessageSmall = (props) => {
-  const ref = useRef();
   return (
     <Text
-      color="#777"
-      fontSize={0.2}
+      color={props.color || "#fff"}
+      fontSize={2}
       maxWidth={3}
       lineHeight={1.3}
       letterSpacing={-0.01}

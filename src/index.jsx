@@ -40,11 +40,6 @@ const defaultText = `
 e_lektron on poolenisti virtuaalne, poolenisti füüsiline platvorm, mis liidab etenduskunstide ja teaduse otsingulisi tegevusi. e_lektroni sisu on kunstnike ja teadlaste koostöö.`;
 
 const App = () => {
-  const [backgroundColor, setBackgroundColor] = useState("#111111");
-  const [panelColor, setPanelColor] = useState("#111111");
-  const [lineColor, setLineColor] = useState("#cccccc");
-  const [panelsOffset, setPanelsOffset] = useState(0);
-
   const { settings } = useSettings();
 
   return (
@@ -77,8 +72,10 @@ const App = () => {
               color={settings.panelColor}
               text={settings.text}
               lineColor={settings.lineColor}
+              fontColor={settings.fontColor}
+              fontSize={settings.fontSize}
             />
-            <Message color="white" position={[-1, 1.5, 0]}>
+            <Message position={[-1, 1.5, 0]} color={settings.fontColor}>
               Live
             </Message>
           </group>
@@ -88,7 +85,7 @@ const App = () => {
           />
           <Avatars />
           <OrbitControls />
-          <Lights />
+          <Lights color={settings.lightColor} />
           <Effects />
         </Canvas>
       </div>
@@ -108,6 +105,12 @@ const settings = [
     title: "Panel color",
     type: "color",
     value: "#111111",
+  },
+  {
+    key: "lightColor",
+    title: "Light color",
+    type: "color",
+    value: "#ffffff",
   },
   {
     key: "lineColor",
@@ -134,6 +137,21 @@ const settings = [
     step: 0.1,
   },
   { key: "text", title: "Text", type: "textarea", rows: 5, value: "what" },
+  {
+    key: "fontSize",
+    title: "Font size",
+    type: "range",
+    value: 0.2,
+    min: 0.2,
+    max: 1.8,
+    step: 0.05,
+  },
+  {
+    key: "fontColor",
+    title: "Font color",
+    type: "color",
+    value: "#ffffff",
+  },
 ];
 
 ReactDOM.render(

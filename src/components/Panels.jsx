@@ -27,7 +27,7 @@ const points = [
   [9, -6],
 ];
 
-export const Panels = ({ color, lineColor, text }) => (
+export const Panels = ({ color, lineColor, text, fontSize, fontColor }) => (
   <group rotation={[degToRad(-90), 0, 0]}>
     {pointsTransforms(points).map((p, i) => (
       <group key={i} position={p.position} rotation={[0, 0, p.angle]}>
@@ -42,20 +42,11 @@ export const Panels = ({ color, lineColor, text }) => (
           <MessageSmall
             position={[-1.8, -0.1, 2.8]}
             rotation={[degToRad(90), 0, 0]}
+            fontSize={fontSize}
+            color={fontColor}
           >
             {text}
           </MessageSmall>
-        )}
-        {i === 7 && (
-          <Suspense fallback={null}>
-            <Image
-              src="/hexacoralia.jpg"
-              position={[0, -0.1, 1.5]}
-              rotation={[degToRad(90), 0, 0]}
-              scale={[1, 1, 1]}
-              opacity={0}
-            />
-          </Suspense>
         )}
       </group>
     ))}
