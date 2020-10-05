@@ -11,7 +11,7 @@ export const Avatar = (props) => {
       {...props}
       onPointerOver={() => setActive(true)}
       onPointerOut={() => setActive(false)}
-      color={active ? "orange" : "yellow"}
+      color={active ? "#FFA500" : color}
       scale={[active ? 1.5 : 1, active ? 1.5 : 1, active ? 1.5 : 1]}
     />
   );

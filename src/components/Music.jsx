@@ -7,7 +7,13 @@ export const Music = () => {
     autoPlay: false,
     loop: true,
   });
-  //useEffect(() => controls.play(), []);
+  const [audio2, state2, controls2, ref2] = useAudio({
+    src: "./crowd.mp3",
+    autoPlay: false,
+    loop: true,
+  });
+
+  useEffect(() => controls2.volume(0.25), []);
 
   return (
     <>
@@ -22,11 +28,20 @@ export const Music = () => {
           cursor: "pointer",
           zIndex: 1000,
         }}
-        onClick={() => (state.paused ? controls.play() : controls.pause())}
       >
-        {state.paused ? "▶" : "❚❚"}
+        <div
+          onClick={() => (state.paused ? controls.play() : controls.pause())}
+        >
+          {state.paused ? "▶" : "❚❚"}
+        </div>
+        <div
+          onClick={() => (state2.paused ? controls2.play() : controls2.pause())}
+        >
+          {state2.paused ? "▶" : "❚❚"}
+        </div>
       </div>
       {audio}
+      {audio2}
     </>
   );
 };

@@ -1,7 +1,7 @@
 import React, { Suspense, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Canvas, useFrame, useThree } from "react-three-fiber";
-import { OrbitControls, Box } from "drei";
+import { OrbitControls } from "drei";
 import { useAudio } from "react-use";
 import { PCFSoftShadowMap } from "three";
 
@@ -22,6 +22,7 @@ import {
   Schedule,
   Video,
   VideoEmpty,
+  Box,
 } from "./components";
 
 import {
@@ -83,7 +84,7 @@ const App = () => {
             position={[-1, settings.videoOffset, 0]}
             scale={[5, 5, 5]}
           />
-          <Avatars />
+          <Avatars type={settings.avatarType} color={settings.avatarColor} />
           <OrbitControls />
           <Lights color={settings.lightColor} />
           <Effects />
@@ -122,7 +123,7 @@ const settings = [
     key: "panelOffset",
     title: "Panel offset",
     type: "range",
-    value: 0,
+    value: -3.2,
     min: -3.2,
     max: 0,
     step: 0.1,
@@ -151,6 +152,19 @@ const settings = [
     title: "Font color",
     type: "color",
     value: "#ffffff",
+  },
+  {
+    key: "avatarType",
+    title: "Avatar type",
+    type: "range",
+    value: 0,
+    max: 2,
+  },
+  {
+    key: "avatarColor",
+    title: "Avatar color",
+    type: "color",
+    value: "#ffff00",
   },
 ];
 
