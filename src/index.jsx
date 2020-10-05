@@ -68,7 +68,7 @@ const App = () => {
             color={settings.panelColor}
             lineColor={settings.lineColor}
           />
-          <group position-y={settings.panelOffset}>
+          <group position-y={settings.panelOffset} scale={[1, 1, 1]}>
             <Panels
               color={settings.panelColor}
               text={settings.text}
@@ -123,9 +123,18 @@ const settings = [
     key: "panelOffset",
     title: "Panel offset",
     type: "range",
-    value: -3.2,
+    value: 0,
     min: -3.2,
     max: 0,
+    step: 0.1,
+  },
+  {
+    key: "videoOffset",
+    title: "Video offset",
+    type: "range",
+    value: -3.1,
+    min: -3.1,
+    max: 1.5,
     step: 0.1,
   },
   {
