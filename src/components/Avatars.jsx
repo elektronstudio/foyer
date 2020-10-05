@@ -5,10 +5,13 @@ import { Avatar, Box } from ".";
 
 import { random } from "../utils";
 
+const emojis = ["😀", "🤪", "🤢", "😵", "🥶", "🤯"];
+
 const avatars = Array.from({ length: 25 }).map((_) => [
   random(-3, 3),
   random(3, 10),
   random(1, 1.5),
+  Math.floor(random(0, emojis.length - 1)),
 ]);
 
 export const Avatars = ({ type = 0, color = "#ffff00" }) => (
@@ -43,7 +46,7 @@ export const Avatars = ({ type = 0, color = "#ffff00" }) => (
                 color: "white",
               }}
             >
-              😊
+              {emojis[s[3]]}
             </div>
           </Html>,
         ][type]

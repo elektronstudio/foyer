@@ -4,6 +4,7 @@ import { Canvas, useFrame, useThree } from "react-three-fiber";
 import { OrbitControls } from "drei";
 import { useAudio } from "react-use";
 import { PCFSoftShadowMap } from "three";
+import { useKey } from "react-use";
 
 import { SettingsProvider, useSettings } from "./settings";
 
@@ -46,13 +47,21 @@ const Camera = (props) => {
   useEffect(() => void setDefaultCamera(ref.current), []);
   useFrame(() => {
     ref.current.updateMatrixWorld();
-    //ref.current.lookAt([0, 0, 0]);
+    ref.current.lookAt(props.position[0] / 1, 0, props.position[2] - 10);
   });
   return <perspectiveCamera ref={ref} {...props} />;
 };
 
 const App = () => {
   const { settings } = useSettings();
+
+  const [c, setC] = useState({ x: 0, y: 0, z: 0 });
+  useKey("ArrowUp", () => setC({ ...c, z: --c.z }));
+  useKey("ArrowDown", () => setC({ ...c, z: ++c.z }));
+  useKey("ArrowLeft", () => setC({ ...c, x: --c.x }));
+  useKey("ArrowRight", () => setC({ ...c, x: ++c.x }));
+  useKey("q", () => setC({ ...c, y: ++c.y }));
+  useKey("a", () => setC({ ...c, y: --c.y }));
 
   return (
     <>
@@ -78,7 +87,14 @@ const App = () => {
             color={settings.panelColor}
             lineColor={settings.lineColor}
           />
-          <group position-y={settings.panelOffset} scale={[1, 1, 1]}>
+          <group
+            position-y={settings.panelOffset}
+            scale={[
+              settings.panelScale,
+              settings.panelScale,
+              settings.panelScale,
+            ]}
+          >
             <Panels
               color={settings.panelColor}
               text={settings.text}
@@ -86,8 +102,8 @@ const App = () => {
               fontColor={settings.fontColor}
               fontSize={settings.fontSize}
             />
-            <Message position={[-1, 1.5, 0]} color={settings.fontColor}>
-              Live
+            <Message position={[-1, 1.5, -1]} color={settings.fontColor}>
+              {settings.text2}
             </Message>
           </group>
           <VideoEmpty
@@ -96,7 +112,7 @@ const App = () => {
           />
           <Avatars type={settings.avatarType} color={settings.avatarColor} />
           <OrbitControls enablePan={false} />
-          <Camera position={[0, 2, 30 - settings.cameraDistance]} />
+          <Camera position={[0 + c.x / 2, 2 + c.y / 2, 15 + c.z / 2]} />
           <Lights color={settings.lightColor} />
           <Effects />
         </Canvas>
@@ -106,14 +122,6 @@ const App = () => {
 };
 
 const settings = [
-  {
-    key: "cameraDistance",
-    title: "Camera distance",
-    type: "range",
-    value: 10,
-    min: 5,
-    max: 30,
-  },
   {
     key: "backgroundColor",
     title: "Background color",
@@ -125,6 +133,15 @@ const settings = [
     title: "Panel color",
     type: "color",
     value: "#111111",
+  },
+  {
+    key: "panelScale",
+    title: "Panel scale",
+    type: "range",
+    value: 1,
+    min: 1,
+    max: 3,
+    step: 0.01,
   },
   {
     key: "lightColor",
@@ -157,15 +174,19 @@ const settings = [
     step: 0.1,
   },
   {
-    key: "videoOffset",
-    title: "Video offset",
-    type: "range",
-    value: -3.1,
-    min: -3.1,
-    max: 1.5,
-    step: 0.1,
+    key: "text2",
+    title: "Title",
+    type: "text",
+    value: "elektron",
   },
-  { key: "text", title: "Text", type: "textarea", rows: 5, value: "what" },
+  {
+    key: "text",
+    title: "Text",
+    type: "textarea",
+    rows: 5,
+    value:
+      "elektron.live is virtual performative space. It brings performers and audiences together while minimizing the restrictions to access since any number of audience members is possible.",
+  },
   {
     key: "fontSize",
     title: "Font size",
