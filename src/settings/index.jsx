@@ -26,7 +26,7 @@ export const SettingsProvider = ({ children, settings: settingsFields }) => {
               width: "250px",
               color: "white",
               padding: "32px",
-              background: "rgba(30,30,30,0.5)",
+              background: "rgba(30,30,30,0.85)",
               fontFamily: "sans-serif",
             }}
           >

@@ -117,6 +117,7 @@ const App = () => {
             <VideoEmpty
               position={[-1, settings.videoOffset, 0]}
               scale={[5, 5, 5]}
+              color={settings.videoColor}
             />
           </group>
 
@@ -124,7 +125,7 @@ const App = () => {
             <Avatars type={settings.avatarType} color={settings.avatarColor} />
           </group>
           <OrbitControls enablePan={false} />
-          <Camera position={[0 + c.x / 2, 2 + c.y / 2, 15 + c.z / 2]} />
+          <Camera position={[0 + c.x / 2, 2 + c.y / 2, 12 + c.z / 2]} />
           <Lights color={settings.lightColor} />
           <Effects />
         </Canvas>
@@ -171,16 +172,23 @@ const settings = [
     key: "videoOffset",
     title: "Video offset",
     type: "range",
-    value: -3.1,
+    value: -10,
     min: -10,
     max: 1.5,
     step: 0.1,
+  },
+
+  {
+    key: "videoColor",
+    title: "Video color",
+    type: "color",
+    value: "#ffffff",
   },
   {
     key: "avatarOffset",
     title: "Avatar offset",
     type: "range",
-    value: -3.2,
+    value: -10,
     min: -10,
     max: 0,
     step: 0.1,
@@ -197,13 +205,13 @@ const settings = [
     type: "textarea",
     rows: 5,
     value:
-      "elektron.live is virtual performative space. It brings performers and audiences together while minimizing the restrictions to access since any number of audience members is possible.",
+      "elektron.live is virtual performative space. It brings performers and audiences together in both physical and online world.",
   },
   {
     key: "fontSize",
     title: "Font size",
     type: "range",
-    value: 0.2,
+    value: 0.25,
     min: 0.2,
     max: 1.8,
     step: 0.05,

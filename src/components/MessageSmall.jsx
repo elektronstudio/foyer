@@ -6,7 +6,7 @@ export const MessageSmall = (props) => {
     <Text
       color={props.color || "#fff"}
       fontSize={2}
-      maxWidth={3}
+      maxWidth={3.5}
       lineHeight={1.3}
       letterSpacing={-0.01}
       textAlign={"left"}

@@ -40,7 +40,7 @@ export const Panels = ({ color, lineColor, text, fontSize, fontColor }) => (
         />
         {i === 8 && (
           <MessageSmall
-            position={[-1.8, -0.1, 2.8]}
+            position={[-1.8, -0.1, 2.7]}
             rotation={[degToRad(90), 0, 0]}
             fontSize={fontSize}
             color={fontColor}
