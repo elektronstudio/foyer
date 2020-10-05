@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from "react";
+import React, { Suspense, useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { Canvas, useFrame, useThree } from "react-three-fiber";
 import { OrbitControls } from "drei";
@@ -40,6 +40,17 @@ import "./styles.css";
 const defaultText = `
 e_lektron on poolenisti virtuaalne, poolenisti füüsiline platvorm, mis liidab etenduskunstide ja teaduse otsingulisi tegevusi. e_lektroni sisu on kunstnike ja teadlaste koostöö.`;
 
+const Camera = (props) => {
+  const ref = useRef();
+  const { setDefaultCamera } = useThree();
+  useEffect(() => void setDefaultCamera(ref.current), []);
+  useFrame(() => {
+    ref.current.updateMatrixWorld();
+    //ref.current.lookAt([0, 0, 0]);
+  });
+  return <perspectiveCamera ref={ref} {...props} />;
+};
+
 const App = () => {
   const { settings } = useSettings();
 
@@ -55,7 +66,6 @@ const App = () => {
       >
         <Canvas
           invalidateFrameloop={true}
-          camera={{ position: [0, 2, 8], fov: 100 }}
           onCreated={({ gl }) => {
             gl.shadowMap.enabled = true;
             gl.shadowMap.type = PCFSoftShadowMap;
@@ -85,7 +95,8 @@ const App = () => {
             scale={[5, 5, 5]}
           />
           <Avatars type={settings.avatarType} color={settings.avatarColor} />
-          <OrbitControls />
+          <OrbitControls enablePan={false} />
+          <Camera position={[0, 2, 30 - settings.cameraDistance]} />
           <Lights color={settings.lightColor} />
           <Effects />
         </Canvas>
@@ -95,6 +106,14 @@ const App = () => {
 };
 
 const settings = [
+  {
+    key: "cameraDistance",
+    title: "Camera distance",
+    type: "range",
+    value: 10,
+    min: 5,
+    max: 30,
+  },
   {
     key: "backgroundColor",
     title: "Background color",
